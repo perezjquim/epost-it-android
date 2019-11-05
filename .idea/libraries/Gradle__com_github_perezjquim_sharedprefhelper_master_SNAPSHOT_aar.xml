@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.perezjquim:sharedprefhelper:master-SNAPSHOT@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/sharedprefhelper-master-SNAPSHOT.aar/4b22dc8f63c6beb5abfc75c9327b7436/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/sharedprefhelper-master-SNAPSHOT.aar/4b22dc8f63c6beb5abfc75c9327b7436/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.perezjquim:permissionchecker:master-SNAPSHOT@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/permissionchecker-master-SNAPSHOT.aar/867e16b2c20295106fad3386d68a88d9/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/permissionchecker-master-SNAPSHOT.aar/867e16b2c20295106fad3386d68a88d9/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
