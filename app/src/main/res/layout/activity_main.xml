@@ -23,7 +23,7 @@
             android:id="@+id/b_bluethooth"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:text="Encontrar dispositivos"
+            android:text="@string/scan_devices"
             android:onClick="onButhoothHandler"/>
         
     </LinearLayout>

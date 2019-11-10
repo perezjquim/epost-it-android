@@ -35,4 +35,7 @@ dependencies {
     implementation 'com.github.perezjquim:sharedprefhelper:master-SNAPSHOT'
     implementation 'com.github.perezjquim:permissionchecker:master-SNAPSHOT'
     implementation 'com.github.perezjquim:uihelper:-SNAPSHOT'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    implementation 'com.android.support:design:28.0.0'
+    implementation 'com.android.support:recyclerview-v7:28.+'
 }

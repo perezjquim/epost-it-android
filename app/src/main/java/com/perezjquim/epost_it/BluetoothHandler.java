@@ -13,13 +13,17 @@ import android.widget.Toast;
 
 import com.perezjquim.PermissionChecker;
 
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+
 public class BluetoothHandler {
 
     private BluetoothAdapter adapter;
     private BroadcastReceiver mReceiver;
-    private Activity activity;
+    private FindDevicesActivity activity;
+    private final static int REQUEST_ENABLE_BT = 1;
 
-    public BluetoothHandler(Activity activity)
+    public BluetoothHandler(FindDevicesActivity activity)
     {
         this.activity = activity;
         this.adapter = BluetoothAdapter.getDefaultAdapter();
@@ -38,6 +42,22 @@ public class BluetoothHandler {
         adapter.startDiscovery();
     }
 
+    public int bluetoothState()
+    {
+        BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        if (mBluetoothAdapter == null) {
+            // Device does not support Bluetooth
+            return -1;
+        }
+        if (!mBluetoothAdapter.isEnabled()) {
+            Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+            activity.startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+            return 0;
+        }else{
+            return 1;
+        }
+    }
+
     private BroadcastReceiver initializeReceiver()
     {
         return mReceiver = new BroadcastReceiver() {
@@ -51,10 +71,50 @@ public class BluetoothHandler {
                 } else if (BluetoothDevice.ACTION_FOUND.equals(action)) {
                     //bluetooth device found
                     BluetoothDevice device = (BluetoothDevice) intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-                    Toast.makeText(context, "Found device " + device.getName(),
-                            Toast.LENGTH_LONG).show();
+                    //String deviceId = getDeviceName(device);
+//                    activity.addDeviceName(deviceId);
+                    activity.addDevice(device);
+                }
+                //pair/unpair device
+                else if (BluetoothDevice.ACTION_BOND_STATE_CHANGED.equals(action)) {
+                    final int state        = intent.getIntExtra(BluetoothDevice.EXTRA_BOND_STATE, BluetoothDevice.ERROR);
+                    final int prevState    = intent.getIntExtra(BluetoothDevice.EXTRA_PREVIOUS_BOND_STATE, BluetoothDevice.ERROR);
+
+                    if (state == BluetoothDevice.BOND_BONDED && prevState == BluetoothDevice.BOND_BONDING) {
+                        Toast.makeText(context, "Paired", Toast.LENGTH_SHORT).show();
+                    } else if (state == BluetoothDevice.BOND_NONE && prevState == BluetoothDevice.BOND_BONDED){
+                        ///showToast("Unpaired");
+                    }
+
                 }
             }
         };
     }
+
+    public void pairDevice(BluetoothDevice device)
+    {
+        try {
+            Method method = device.getClass().getMethod("createBond", (Class[]) null);
+            method.invoke(device, (Object[]) null);
+            IntentFilter intent = new IntentFilter(BluetoothDevice.ACTION_BOND_STATE_CHANGED);
+            activity.registerReceiver(mReceiver, intent);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+//    public String getDeviceName(BluetoothDevice device)
+//    {
+//        String deviceId = "";
+//        if(device.getName() == null){
+//            deviceId = device.getAddress();
+//        }else{
+//            deviceId = device.getName();
+//        }
+//        return deviceId;
+//    }
+
+    public int getREQUEST_ENABLE_BT() { return this.REQUEST_ENABLE_BT;}
+
+    public BroadcastReceiver getMReceiver(){return this.mReceiver;}
 }
