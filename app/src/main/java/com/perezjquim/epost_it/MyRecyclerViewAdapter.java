@@ -18,11 +18,13 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     private Context context;
 //    private ArrayList<String> devicesNames = new ArrayList<String>();
     private ArrayList<BluetoothDevice> devices = new ArrayList<BluetoothDevice>();
+    private onClickInterface onClickInterface;
 
-    public MyRecyclerViewAdapter(Context context, ArrayList<BluetoothDevice> devices) {
+    public MyRecyclerViewAdapter(Context context, ArrayList<BluetoothDevice> devices, onClickInterface onClickInterface) {
         this.context = context;
         //this.devicesNames = devicesNames;
         this.devices = devices;
+        this.onClickInterface = onClickInterface;
     }
 
     @NonNull
@@ -37,6 +39,12 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     public void onBindViewHolder(ViewHolder viewHolder, final int i) {
         //viewHolder.tvDeviceName.setText(devicesNames.get(i));
         viewHolder.tvDeviceName.setText(getDeviceName(devices.get(i)));
+        viewHolder.rowLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickInterface.setClick(i);
+            }
+        });
     }
 
     @Override

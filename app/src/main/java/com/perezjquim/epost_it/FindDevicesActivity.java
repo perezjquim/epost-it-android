@@ -13,12 +13,13 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class FindDevicesActivity extends AppCompatActivity {
+public class FindDevicesActivity extends AppCompatActivity{
     private BluetoothHandler bluetoothHandler;
 //    private ArrayList<String> devicesNames = new ArrayList<String>();
     private ArrayList<BluetoothDevice> devices = new ArrayList<BluetoothDevice>();
     private RecyclerView recyclerView;
     private MyRecyclerViewAdapter adapter;
+    private onClickInterface onClickInterface;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +27,13 @@ public class FindDevicesActivity extends AppCompatActivity {
         super.setTheme(R.style.AppTheme);
         setContentView(R.layout.activity_find_devices);
         bluetoothHandler = new BluetoothHandler(FindDevicesActivity.this);
+        onClickInterface = new onClickInterface() {
+            @Override
+            public void setClick(int position) {
+                Toast.makeText(FindDevicesActivity.this, "Position " + position, Toast.LENGTH_SHORT).show();
+                bluetoothHandler.pairDevice(devices.get(position));
+            }
+        };
         int bluetoothState = bluetoothHandler.bluetoothState();
         if(bluetoothState == 1){//Bluetooth active
             bluetoothHandler.scanDevices();
@@ -38,7 +46,7 @@ public class FindDevicesActivity extends AppCompatActivity {
     private void initializeRecycleView()
     {
         this.recyclerView = findViewById(R.id.rvDevices);
-        this.adapter = new MyRecyclerViewAdapter(this, this.devices);
+        this.adapter = new MyRecyclerViewAdapter(this, this.devices,onClickInterface);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
@@ -52,10 +60,10 @@ public class FindDevicesActivity extends AppCompatActivity {
         }
     }
 
-    public void onPairUnPairDevice(View view)
-    {
-        Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
-    }
+//    public void onPairUnPairDevice(View view)
+//    {
+//        Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
+//    }
 
     @Override
     protected void onDestroy() {
