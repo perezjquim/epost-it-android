@@ -16,13 +16,11 @@ import java.util.ArrayList;
 public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder>
 {
     private Context context;
-//    private ArrayList<String> devicesNames = new ArrayList<String>();
     private ArrayList<BluetoothDevice> devices = new ArrayList<BluetoothDevice>();
     private onClickInterface onClickInterface;
 
     public MyRecyclerViewAdapter(Context context, ArrayList<BluetoothDevice> devices, onClickInterface onClickInterface) {
         this.context = context;
-        //this.devicesNames = devicesNames;
         this.devices = devices;
         this.onClickInterface = onClickInterface;
     }
@@ -37,7 +35,6 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int i) {
-        //viewHolder.tvDeviceName.setText(devicesNames.get(i));
         viewHolder.tvDeviceName.setText(getDeviceName(devices.get(i)));
         viewHolder.rowLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,12 +62,10 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView tvDeviceName;
-//        private Button bPairUnPair;
         private LinearLayout rowLayout;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvDeviceName = itemView.findViewById(R.id.tvDeviceName);
-//            bPairUnPair = itemView.findViewById(R.id.bPairUnPair);
             rowLayout = itemView.findViewById(R.id.row_layout);
         }
     }

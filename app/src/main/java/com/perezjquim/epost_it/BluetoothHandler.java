@@ -71,8 +71,6 @@ public class BluetoothHandler {
                 } else if (BluetoothDevice.ACTION_FOUND.equals(action)) {
                     //bluetooth device found
                     BluetoothDevice device = (BluetoothDevice) intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-                    //String deviceId = getDeviceName(device);
-//                    activity.addDeviceName(deviceId);
                     activity.addDevice(device);
                 }
                 //pair/unpair device
@@ -102,17 +100,6 @@ public class BluetoothHandler {
             e.printStackTrace();
         }
     }
-
-//    public String getDeviceName(BluetoothDevice device)
-//    {
-//        String deviceId = "";
-//        if(device.getName() == null){
-//            deviceId = device.getAddress();
-//        }else{
-//            deviceId = device.getName();
-//        }
-//        return deviceId;
-//    }
 
     public int getREQUEST_ENABLE_BT() { return this.REQUEST_ENABLE_BT;}
 

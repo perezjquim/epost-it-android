@@ -15,7 +15,6 @@ import java.util.ArrayList;
 
 public class FindDevicesActivity extends AppCompatActivity{
     private BluetoothHandler bluetoothHandler;
-//    private ArrayList<String> devicesNames = new ArrayList<String>();
     private ArrayList<BluetoothDevice> devices = new ArrayList<BluetoothDevice>();
     private RecyclerView recyclerView;
     private MyRecyclerViewAdapter adapter;
@@ -27,13 +26,7 @@ public class FindDevicesActivity extends AppCompatActivity{
         super.setTheme(R.style.AppTheme);
         setContentView(R.layout.activity_find_devices);
         bluetoothHandler = new BluetoothHandler(FindDevicesActivity.this);
-        onClickInterface = new onClickInterface() {
-            @Override
-            public void setClick(int position) {
-                Toast.makeText(FindDevicesActivity.this, "Position " + position, Toast.LENGTH_SHORT).show();
-                bluetoothHandler.pairDevice(devices.get(position));
-            }
-        };
+        onClickInterface = initializeClickInterface();
         int bluetoothState = bluetoothHandler.bluetoothState();
         if(bluetoothState == 1){//Bluetooth active
             bluetoothHandler.scanDevices();
@@ -41,6 +34,17 @@ public class FindDevicesActivity extends AppCompatActivity{
             Toast.makeText(this, getString(R.string.no_bluetooth), Toast.LENGTH_SHORT).show();
         }
         initializeRecycleView();
+    }
+
+    private onClickInterface initializeClickInterface()
+    {
+        return onClickInterface = new onClickInterface() {
+            @Override
+            public void setClick(int position) {
+                Toast.makeText(FindDevicesActivity.this, "Position " + position, Toast.LENGTH_SHORT).show();
+                bluetoothHandler.pairDevice(devices.get(position));
+            }
+        };
     }
 
     private void initializeRecycleView()
@@ -60,27 +64,17 @@ public class FindDevicesActivity extends AppCompatActivity{
         }
     }
 
-//    public void onPairUnPairDevice(View view)
-//    {
-//        Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
-//    }
-
     @Override
     protected void onDestroy() {
         unregisterReceiver(bluetoothHandler.getMReceiver());
         super.onDestroy();
     }
 
-//    public void addDeviceName(String deviceName)
-//    {
-//        if(!this.devicesNames.contains(deviceName)){
-//            this.devicesNames.add(deviceName);
-//            adapter.notifyItemInserted(this.devicesNames.size() - 1);
-//        }
-//    }
     public void addDevice(BluetoothDevice device)
     {
-        this.devices.add(device);
-        adapter.notifyItemInserted(this.devices.size() - 1);
+        if(!this.devices.contains(device)) {
+            this.devices.add(device);
+            adapter.notifyItemInserted(this.devices.size() - 1);
+        }
     }
 }
