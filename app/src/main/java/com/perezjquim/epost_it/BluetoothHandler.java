@@ -81,7 +81,7 @@ public class BluetoothHandler {
                     if (state == BluetoothDevice.BOND_BONDED && prevState == BluetoothDevice.BOND_BONDING) {
                         Toast.makeText(context, "Paired", Toast.LENGTH_SHORT).show();
                     } else if (state == BluetoothDevice.BOND_NONE && prevState == BluetoothDevice.BOND_BONDED){
-                        ///showToast("Unpaired");
+                        Toast.makeText(context, "Unpaired", Toast.LENGTH_SHORT).show();
                     }
 
                 }
@@ -96,6 +96,16 @@ public class BluetoothHandler {
             method.invoke(device, (Object[]) null);
             IntentFilter intent = new IntentFilter(BluetoothDevice.ACTION_BOND_STATE_CHANGED);
             activity.registerReceiver(mReceiver, intent);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void unpairDevice(BluetoothDevice device) {
+        try {
+            Method method = device.getClass().getMethod("removeBond", (Class[]) null);
+            method.invoke(device, (Object[]) null);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
