@@ -1,6 +1,8 @@
 package com.perezjquim.epost_it;
 
 import com.perezjquim.PermissionChecker;
+import com.perezjquim.epost_it.data.StorageHandler;
+
 import android.os.Bundle;
 
 public class MainActivity extends GenericActivity
@@ -10,5 +12,7 @@ public class MainActivity extends GenericActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        StorageHandler.test();
     }
 }

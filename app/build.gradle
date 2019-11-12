@@ -35,4 +35,8 @@ dependencies {
     implementation 'com.github.perezjquim:sharedprefhelper:master-SNAPSHOT'
     implementation 'com.github.perezjquim:permissionchecker:master-SNAPSHOT'
     implementation 'com.github.perezjquim:uihelper:-SNAPSHOT'
+    implementation ('com.github.satyan:sugar:1.4')
+    {
+        exclude module: 'support-v4'
+    }
 }
