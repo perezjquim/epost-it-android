@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class FindDevicesActivity extends AppCompatActivity{
+public class FindDevicesActivity extends GenericActivity{
     private BluetoothHandler bluetoothHandler;
     private ArrayList<BluetoothDevice> devices = new ArrayList<BluetoothDevice>();
     private RecyclerView recyclerView;
@@ -23,7 +23,6 @@ public class FindDevicesActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        super.setTheme(R.style.AppTheme);
         setContentView(R.layout.activity_find_devices);
         bluetoothHandler = new BluetoothHandler(FindDevicesActivity.this);
         onClickInterface = initializeClickInterface();
