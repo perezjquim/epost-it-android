@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">ePost-it</string>
+    <string name="title_activity_find_devices2">FindDevicesActivity2</string>
+    <string name="scan_devices">Encontrar dispositivos</string>
+    <string name="no_bluetooth">Este dispositivo não tem bluetooth.</string>
 </resources>
