@@ -4,8 +4,9 @@ import com.orm.*;
 
 public class Alert extends SugarRecord
 {
-    private int id;
-    private int epostit_id;
+    private Long id;
+
+    private ePostIt epost_it;
 
     private Date begin_date;
     private Date end_date;
@@ -23,10 +24,9 @@ public class Alert extends SugarRecord
 
     public Alert() {}
 
-    public Alert(int id, int epostit_id, Date begin_date, Date end_date, Time alert_time, boolean is_mon, boolean is_tue, boolean is_wed, boolean is_thu, boolean is_fri, boolean is_sat, boolean is_sun, boolean is_active)
+    public Alert(ePostIt epost_it, Date begin_date, Date end_date, Time alert_time, boolean is_mon, boolean is_tue, boolean is_wed, boolean is_thu, boolean is_fri, boolean is_sat, boolean is_sun, boolean is_active)
     {
-        this.id = id;
-        this.epostit_id = epostit_id;
+        this.epost_it = epost_it;
         this.begin_date = begin_date;
         this.end_date = end_date;
         this.alert_time = alert_time;

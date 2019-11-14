@@ -4,12 +4,13 @@ import java.sql.*;
 
 public class Tag extends SugarRecord
 {
-    private int id;
+    private Long id;
+
     private String desc;
 
     public Tag() {}
 
-    public Tag(int id, String desc)
+    public Tag(String desc)
     {
         this.id = id;
         this.desc = desc;

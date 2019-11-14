@@ -1,15 +1,30 @@
 package com.perezjquim.epost_it.data;
 
+import com.orm.query.*;
 import com.perezjquim.epost_it.data.model.*;
 import android.content.*;
+import java.util.*;
 
 public abstract class DBHandler
 {
+    public static void clearData()
+    {
+        Alert.deleteAll(Alert.class);
+        ePostIt.deleteAll(ePostIt.class);
+        ePostItHasTags.deleteAll(ePostItHasTags.class);
+        Tag.deleteAll(Tag.class);
+    }
+
     public static void test()
     {
-        Tag a = new Tag(1,"ola");
+        clearData();
+
+        Tag a = new Tag("ola");
         a.save();
-        ePostIt e  = new ePostIt(1,"TT:TT:TT:TT",true);
+        ePostIt e  = new ePostIt("TT:TT:TT:TT",true);
         e.save();
+
+        List<Tag> c = Select.from(Tag.class).list();
+        System.out.println(c.size());
     }
 }

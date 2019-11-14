@@ -5,14 +5,16 @@ import java.sql.*;
 
 public class ePostItHasTags extends SugarRecord
 {
-        private int id_epostit;
-        private int id_tag;
+        private Long id;
+
+        private ePostIt epost_it;
+        private Tag tag;
 
         public ePostItHasTags() {}
 
-        public ePostItHasTags(int id_epostit, int id_tag)
+        public ePostItHasTags(int epost_it, int tag)
         {
-                this.id_epostit = id_epostit;
-                this.id_tag = id_tag;
+                this.epost_it = epost_it;
+                this.tag = tag;
         }
 }
