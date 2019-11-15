@@ -1,6 +1,9 @@
 package com.perezjquim.epost_it.data.model;
-import java.sql.*;
-import com.orm.*;
+
+import com.orm.SugarRecord;
+
+import java.sql.Date;
+import java.sql.Time;
 
 public class Alert extends SugarRecord
 {
@@ -37,6 +40,11 @@ public class Alert extends SugarRecord
         this.is_fri = is_fri;
         this.is_sat = is_sat;
         this.is_sun = is_sun;
+        this.is_active = is_active;
+    }
+
+    public void setActive(boolean is_active)
+    {
         this.is_active = is_active;
     }
 }

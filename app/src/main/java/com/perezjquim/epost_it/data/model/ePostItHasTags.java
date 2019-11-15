@@ -1,7 +1,6 @@
 package com.perezjquim.epost_it.data.model;
 
-import com.orm.*;
-import java.sql.*;
+import com.orm.SugarRecord;
 
 public class ePostItHasTags extends SugarRecord
 {
@@ -12,7 +11,7 @@ public class ePostItHasTags extends SugarRecord
 
         public ePostItHasTags() {}
 
-        public ePostItHasTags(int epost_it, int tag)
+        public ePostItHasTags(ePostIt epost_it, Tag tag)
         {
                 this.epost_it = epost_it;
                 this.tag = tag;

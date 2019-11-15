@@ -1,6 +1,6 @@
 package com.perezjquim.epost_it.data.model;
-import com.orm.*;
-import java.sql.*;
+
+import com.orm.SugarRecord;
 
 public class Tag extends SugarRecord
 {
