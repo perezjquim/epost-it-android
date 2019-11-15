@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.perezjquim.UIHelper;
 import com.perezjquim.epost_it.R;
+import com.perezjquim.epost_it.data.StorageHandler;
 import com.perezjquim.epost_it.misc.BluetoothHandler;
 import com.perezjquim.epost_it.misc.GenericActivity;
 import com.perezjquim.epost_it.misc.MyRecyclerViewAdapter;
@@ -34,8 +35,9 @@ public class FindDevicesActivity extends GenericActivity
         }else if(bluetoothState == -1){//No support bluetooth
             UIHelper.toast(this, getString(R.string.no_bluetooth));
         }
-        initializeRecycleView();
+
         devices = new ArrayList<BluetoothDevice>();
+        initializeRecycleView();
     }
 
     private void initializeRecycleView()
