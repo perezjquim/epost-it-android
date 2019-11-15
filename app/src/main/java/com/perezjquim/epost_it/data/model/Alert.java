@@ -46,5 +46,124 @@ public class Alert extends SugarRecord
     public void setActive(boolean is_active)
     {
         this.is_active = is_active;
+        save();
+    }
+
+    public void setBeginDate(Date begin_date)
+    {
+        // TODO - validar se a data está no passado
+        this.begin_date = begin_date;
+        save();
+    }
+
+    public void setEndDate(Date end_date)
+    {
+        // TODO - validar se a data está no passado
+        this.end_date = end_date;
+        save();
+    }
+
+    public void setAlertTime(Time alert_time)
+    {
+        // TODO - validar se o tempo introduzido está no passado
+        this.alert_time = alert_time;
+        save();
+    }
+
+    public void setMonday(boolean is_mon)
+    {
+        this.is_mon = is_mon;
+        save();
+    }
+
+    public void setTuesday(boolean is_tue)
+    {
+        this.is_tue = is_tue;
+        save();
+    }
+
+    public void setWednesday(boolean is_wed)
+    {
+        this.is_wed = is_wed;
+        save();
+    }
+
+    public void setThursday(boolean is_thu)
+    {
+        this.is_thu = is_thu;
+        save();
+    }
+
+    public void setFriday(boolean is_fri)
+    {
+        this.is_fri = is_fri;
+        save();
+    }
+
+    public void setSaturday(boolean is_sat)
+    {
+        this.is_sat = is_sat;
+        save();
+    }
+
+    public void setSunday(boolean is_sun)
+    {
+        this.is_sun = is_sun;
+        save();
+    }
+
+    public ePostIt getEPostIt()
+    {
+        return epost_it;
+    }
+
+    public Date getBeginDate()
+    {
+        return begin_date;
+    }
+
+    public Date getEndDate()
+    {
+        return end_date;
+    }
+
+    public Time getAlertTime()
+    {
+        return alert_time;
+    }
+
+    public boolean isMonday()
+    {
+        return is_mon;
+    }
+
+    public boolean isTuesday()
+    {
+        return is_tue;
+    }
+
+    public boolean isWednesday()
+    {
+        return is_wed;
+    }
+
+    public boolean isThursday()
+    {
+        return is_thu;
+    }
+
+    public boolean isFriday()
+    {
+        return is_fri;
+    }
+
+    public boolean isSaturday()
+    {
+        return is_sat;
+    }
+
+    public boolean isSunday()
+    {
+        return is_sun;
     }
 }

@@ -13,14 +13,14 @@ import java.util.List;
 
 public abstract class StorageHandler
 {
-    public static void clearData()
+    // >>> EPOST-IT
+    // >>> EPOST-IT
+    // >>> EPOST-IT
+    public static List<ePostIt> getAllEPostIts()
     {
-        Alert.deleteAll(Alert.class);
-        ePostIt.deleteAll(ePostIt.class);
-        ePostItHasTags.deleteAll(ePostItHasTags.class);
-        Tag.deleteAll(Tag.class);
+        List<ePostIt> list = Select.from(ePostIt.class).where(Condition.prop("is_active").eq(true)).list();
+        return list;
     }
-
     public static void insertEPostIt(String bt_addr)
     {
         List<ePostIt> epost_it_list = Select.from(ePostIt.class).where(Condition.prop("bt_addr").eq(bt_addr)).list();
@@ -36,9 +36,8 @@ public abstract class StorageHandler
         else
         {
             e = new ePostIt(bt_addr, true);
+            e.save();
         }
-
-        e.save();
     }
 
     public static void deleteEPostIt(String bt_addr)
@@ -50,10 +49,20 @@ public abstract class StorageHandler
         {
             ePostIt e = epost_it_list.get(0);
             e.setActive(false);
-            e.save();
         }
     }
+    // <<< EPOST-IT
+    // <<< EPOST-IT
+    // <<< EPOST-IT
 
+
+    // >>> TAG
+    // >>> TAG
+    // >>> TAG
+    public static List<Tag> getAllTags()
+    {
+        return Tag.listAll(Tag.class);
+    }
     public static void insertTag(String desc)
     {
         List<Tag> tag_list = Select.from(Tag.class).where(Condition.prop("desc").eq(desc)).list();
@@ -65,7 +74,33 @@ public abstract class StorageHandler
             t.save();
         }
     }
+    // <<< TAG
+    // <<< TAG
+    // <<< TAG
 
+
+    // >>> ALERT
+    // >>> ALERT
+    // >>> ALERT
+    public static void insertAlert()
+    {
+
+    }
+    public static void deleteAlert()
+    {
+
+    }
+    public static List<Alert> getAllAlerts()
+    {
+        return Alert.listAll(Alert.class);
+    }
+    // <<< ALERT
+    // <<< ALERT
+    // <<< ALERT
+
+    // >>> TAG - EPOST-IT
+    // >>> TAG - EPOST-IT
+    // >>> TAG - EPOST-IT
     public static void linkTagToEPostIt(String bt_addr, String tag_desc)
     {
         List<ePostIt> epost_it_list = Select.from(ePostIt.class).where(Condition.prop("bt_addr").eq(bt_addr)).list();
@@ -92,8 +127,44 @@ public abstract class StorageHandler
 
     public static void unlinkTagToEPostIt(String bt_addr, String tag_desc)
     {
-        
+        List<ePostIt> epost_it_list = Select.from(ePostIt.class).where(Condition.prop("bt_addr").eq(bt_addr)).list();
+        boolean epost_it_exists = epost_it_list.size() > 0;
+
+        List<Tag> tag_list = Select.from(Tag.class).where(Condition.prop("desc").eq(tag_desc)).list();
+        boolean tag_exists = tag_list.size() > 0;
+
+        if(epost_it_exists && tag_exists)
+        {
+            ePostIt e = epost_it_list.get(0);
+            Tag t = tag_list.get(0);
+
+            List<ePostItHasTags> link_list = Select.from(ePostItHasTags.class).where(Condition.prop("epost_it").eq(e)).and(Condition.prop("tag").eq(t)).list();
+            boolean link_exists = link_list.size() > 0;
+
+            if(link_exists)
+            {
+                ePostItHasTags link = link_list.get(0);
+                link.delete();
+            }
+        }
     }
+    // <<< TAG - EPOST-IT
+    // <<< TAG - EPOST-IT
+    // <<< TAG - EPOST-IT
+
+    // >>> GENERAL
+    // >>> GENERAL
+    // >>> GENERAL
+    public static void clearData()
+    {
+        Alert.deleteAll(Alert.class);
+        ePostIt.deleteAll(ePostIt.class);
+        ePostItHasTags.deleteAll(ePostItHasTags.class);
+        Tag.deleteAll(Tag.class);
+    }
+    // <<< GENERAL
+    // <<< GENERAL
+    // <<< GENERAL
 
     public static void test()
     {
