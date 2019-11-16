@@ -29,6 +29,8 @@ public class BluetoothHandler {
 
     public void scanDevices()
     {
+//        UIHelper.openProgressDialog(activity, "Scanning..");
+
         IntentFilter filter = new IntentFilter();
 
         filter.addAction(BluetoothDevice.ACTION_FOUND);
@@ -63,10 +65,9 @@ public class BluetoothHandler {
 
                 if (BluetoothAdapter.ACTION_DISCOVERY_STARTED.equals(action)) {
                     //discovery starts, we can show progress dialog or perform other tasks
-                    UIHelper.openProgressDialog(activity, "Scanning..");
                 } else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
                     //discovery finishes, dismis progress dialog
-                    UIHelper.closeProgressDialog(activity);
+//                    UIHelper.closeProgressDialog(activity);
                 } else if (BluetoothDevice.ACTION_FOUND.equals(action)) {
                     //bluetooth device found
                     BluetoothDevice device = (BluetoothDevice) intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
@@ -99,7 +100,7 @@ public class BluetoothHandler {
             IntentFilter intent = new IntentFilter(BluetoothDevice.ACTION_BOND_STATE_CHANGED);
             activity.registerReceiver(mReceiver, intent);
 
-            StorageHandler.insertEPostIt(device.getAddress());
+//            StorageHandler.insertEPostIt(device.getAddress());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -110,7 +111,7 @@ public class BluetoothHandler {
             Method method = device.getClass().getMethod("removeBond", (Class[]) null);
             method.invoke(device, (Object[]) null);
 
-            StorageHandler.deleteEPostIt(device.getAddress());
+//            StorageHandler.deleteEPostIt(device.getAddress());
 
         } catch (Exception e) {
             e.printStackTrace();

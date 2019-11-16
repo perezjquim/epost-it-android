@@ -23,6 +23,15 @@ public abstract class StorageHandler
                 .where(Condition.prop("ISACTIVE").eq("1"))
                 .list();
     }
+    public static boolean doesPostItExist(String bt_addr)
+    {
+        return Select
+                .from(ePostIt.class)
+                .where(Condition.prop("ISACTIVE").eq("1"))
+                .and(Condition.prop("BTADDR").eq(bt_addr))
+                .list()
+                .size() > 0;
+    }
     public static void insertEPostIt(String bt_addr)
     {
         List<ePostIt> epost_it_list = Select

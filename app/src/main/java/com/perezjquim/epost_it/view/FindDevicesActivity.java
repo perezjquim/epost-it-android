@@ -71,7 +71,11 @@ public class FindDevicesActivity extends GenericActivity
 
     public void addDevice(BluetoothDevice device)
     {
-        if(!this.devices.contains(device)) {
+        boolean alreadyExists = StorageHandler.doesPostItExist(device.getAddress());
+
+//        if(!this.devices.contains(device)) {
+        if(!alreadyExists)
+        {
             this.devices.add(device);
             adapter.notifyItemInserted(this.devices.size() - 1);
         }
