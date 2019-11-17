@@ -2,16 +2,23 @@ package com.perezjquim.epost_it.misc;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothSocket;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.ParcelUuid;
 
 import com.perezjquim.UIHelper;
 import com.perezjquim.epost_it.data.StorageHandler;
 import com.perezjquim.epost_it.view.FindDevicesActivity;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.lang.reflect.Array;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 
 public class BluetoothHandler {
 
@@ -19,12 +26,19 @@ public class BluetoothHandler {
     private BroadcastReceiver mReceiver;
     private FindDevicesActivity activity;
     public final static int REQUEST_ENABLE_BT = 1;
+    private final int BUFFER_SIZE = 1024;
+    private ArrayList<BluetoothDevice> devicesPaired;
+    private ArrayList<BluetoothSocket> sockets;
+    private BluetoothHandler bluetoothHandler;
 
     public BluetoothHandler(FindDevicesActivity activity)
     {
         this.activity = activity;
         this.adapter = BluetoothAdapter.getDefaultAdapter();
         this.mReceiver = initializeReceiver();
+        this.devicesPaired = new ArrayList<BluetoothDevice>();
+        this.sockets = new ArrayList<BluetoothSocket>();
+        this.bluetoothHandler = this;
     }
 
     public void scanDevices()
@@ -80,6 +94,11 @@ public class BluetoothHandler {
 
                     BluetoothDevice device = (BluetoothDevice) intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
                     if (state == BluetoothDevice.BOND_BONDED && prevState == BluetoothDevice.BOND_BONDING) {
+                        try {
+                            bluetoothHandler.createBluetoothSocket(device);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                         UIHelper.toast(context, "Paired");
                         StorageHandler.insertEPostIt(device.getAddress());
                     } else if (state == BluetoothDevice.BOND_NONE && prevState == BluetoothDevice.BOND_BONDED){
@@ -115,8 +134,49 @@ public class BluetoothHandler {
 
         } catch (Exception e) {
             e.printStackTrace();
-        }
+    }
     }
 
+    private void createBluetoothSocket(BluetoothDevice device) throws IOException {
+        ParcelUuid[] uuids = device.getUuids();
+        BluetoothSocket socket = device.createRfcommSocketToServiceRecord(uuids[0].getUuid());
+        socket.connect();
+        OutputStream outputStream = socket.getOutputStream();
+        InputStream inStream = socket.getInputStream();
+        //save sockets
+        this.devicesPaired.add(device);
+        this.sockets.add(socket);
+        this.createReadThread(inStream);
+    }
+
+    public void write(String s, OutputStream outputStream) throws IOException {
+        outputStream.write(s.getBytes());
+    }
+
+    public void createReadThread(InputStream inputStream)
+    {
+        byte[] buffer = new byte[BUFFER_SIZE];
+
+        new Thread(new Runnable() {
+            public void run() {
+                int bytes = 0;
+                try {
+                    //Message received saved in buffer
+                    bytes = inputStream.read(buffer, bytes, BUFFER_SIZE - bytes);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+    private void messageType(int messageCode)
+    {
+        switch (messageCode)
+        {
+            case 1: break; //Push Button press
+            case 2: break; //Filter 
+        }
+    }
     public BroadcastReceiver getMReceiver(){return this.mReceiver;}
 }
