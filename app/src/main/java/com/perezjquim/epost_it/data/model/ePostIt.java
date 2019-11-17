@@ -20,5 +20,11 @@ public class ePostIt extends SugarRecord
     public void setActive(boolean is_active)
     {
         this.is_active = is_active;
+        save();
+    }
+
+    public String getBTAddress()
+    {
+        return bt_addr;
     }
 }

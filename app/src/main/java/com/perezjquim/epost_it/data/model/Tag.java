@@ -15,4 +15,9 @@ public class Tag extends SugarRecord
         this.id = id;
         this.desc = desc;
     }
+
+    public String getDescription()
+    {
+        return desc;
+    }
 }
