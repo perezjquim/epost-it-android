@@ -8,13 +8,15 @@ public class ePostIt extends SugarRecord
 
     private String bt_addr;
     private boolean is_active;
+    private String name;
 
     public ePostIt() {}
 
-    public ePostIt(String bt_addr, boolean is_active)
+    public ePostIt(String bt_addr, boolean is_active, String name)
     {
         this.bt_addr = bt_addr;
         this.is_active = is_active;
+        this.name = name;
     }
 
     public void setActive(boolean is_active)
@@ -26,5 +28,10 @@ public class ePostIt extends SugarRecord
     public String getBTAddress()
     {
         return bt_addr;
+    }
+
+    public String getName()
+    {
+        return this.name;
     }
 }

@@ -10,6 +10,7 @@ import android.content.IntentFilter;
 import android.os.ParcelUuid;
 
 import com.perezjquim.UIHelper;
+import com.perezjquim.epost_it.R;
 import com.perezjquim.epost_it.data.StorageHandler;
 import com.perezjquim.epost_it.view.FindDevicesActivity;
 
@@ -100,7 +101,12 @@ public class BluetoothHandler {
                             e.printStackTrace();
                         }
                         UIHelper.toast(context, "Paired");
-                        StorageHandler.insertEPostIt(device.getAddress());
+                        String name = device.getName();
+                        if(name == null || name.equals("")){
+                            name = context.getResources().getString(R.string.no_device_name);
+                        }
+                        StorageHandler.insertEPostIt(device.getAddress(),name);
+                        //remover o device da lista de devices
                     } else if (state == BluetoothDevice.BOND_NONE && prevState == BluetoothDevice.BOND_BONDED){
                         UIHelper.toast(context, "Unpaired");
                         StorageHandler.deleteEPostIt(device.getAddress());
@@ -175,7 +181,7 @@ public class BluetoothHandler {
         switch (messageCode)
         {
             case 1: break; //Push Button press
-            case 2: break; //Filter 
+            case 2: break; //Filter
         }
     }
     public BroadcastReceiver getMReceiver(){return this.mReceiver;}

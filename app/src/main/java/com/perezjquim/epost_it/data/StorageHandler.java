@@ -2,6 +2,7 @@ package com.perezjquim.epost_it.data;
 
 import com.orm.query.Condition;
 import com.orm.query.Select;
+import com.perezjquim.epost_it.R;
 import com.perezjquim.epost_it.data.model.Alert;
 import com.perezjquim.epost_it.data.model.Tag;
 import com.perezjquim.epost_it.data.model.ePostIt;
@@ -32,7 +33,7 @@ public abstract class StorageHandler
                 .list()
                 .size() > 0;
     }
-    public static void insertEPostIt(String bt_addr)
+    public static void insertEPostIt(String bt_addr, String name)
     {
         List<ePostIt> epost_it_list = Select
                 .from(ePostIt.class)
@@ -51,7 +52,7 @@ public abstract class StorageHandler
         }
         else
         {
-            e = new ePostIt(bt_addr, true);
+            e = new ePostIt(bt_addr, true, name);
             e.save();
 
             System.out.println("EPOSTIT - INSERT - NEW ENTRY");
@@ -247,8 +248,12 @@ public abstract class StorageHandler
 
         Tag a = new Tag("ola");
         a.save();
-        ePostIt e  = new ePostIt("TT:TT:TT:TT",true);
-        e.save();
+        ePostIt e1  = new ePostIt("TT:TT:TT:TT",true,"Name 1");
+        e1.save();
+        ePostIt e2  = new ePostIt("AA:AA:AA:AA",true, "Name 2");
+        e2.save();
+        ePostIt e3  = new ePostIt("CC:CC:CC:CC",true, "Name 3");
+        e3.save();
 
         List<Tag> c = Select.from(Tag.class).list();
         System.out.println(c.size());

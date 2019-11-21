@@ -74,7 +74,7 @@ public class FindDevicesActivity extends GenericActivity
         boolean alreadyExists = StorageHandler.doesPostItExist(device.getAddress());
 
 //        if(!this.devices.contains(device)) {
-        if(!alreadyExists)
+        if(!alreadyExists && !this.devices.contains(device))
         {
             this.devices.add(device);
             adapter.notifyItemInserted(this.devices.size() - 1);
