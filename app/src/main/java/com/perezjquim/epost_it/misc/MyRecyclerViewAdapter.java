@@ -37,6 +37,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int i) {
         viewHolder.tvDeviceName.setText(getDeviceName(devices.get(i)));
+        viewHolder.tvDeviceAddress.setText(devices.get(i).getAddress());
         viewHolder.rowLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,21 +53,25 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
     public String getDeviceName(BluetoothDevice device)
     {
-        String deviceId = "";
-        if(device.getName() == null){
-            deviceId = device.getAddress();
-        }else{
-            deviceId = device.getName();
+//        String deviceId = "";
+        if(device.getName() == null || device.getName().equals("")){
+            return context.getResources().getString(R.string.no_device_name);
+//            deviceId = device.getAddress();
         }
-        return deviceId;
+//        else{
+//            deviceId = device.getName();
+//        }
+        return device.getName();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView tvDeviceName;
+        private TextView tvDeviceAddress;
         private LinearLayout rowLayout;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvDeviceName = itemView.findViewById(R.id.tvDeviceName);
+            tvDeviceAddress = itemView.findViewById(R.id.tvDeviceAddress);
             rowLayout = itemView.findViewById(R.id.row_layout);
         }
     }

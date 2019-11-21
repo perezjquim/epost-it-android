@@ -14,6 +14,7 @@ public class GenericActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+
         super.setTheme(R.style.AppTheme);
         PermissionChecker.init(this);
     }
