@@ -7,22 +7,27 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.github.douglasjunior.bluetoothclassiclibrary.BluetoothStatus;
 import com.perezjquim.epost_it.R;
 
 import java.util.ArrayList;
 
-public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder>
+public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> implements Filterable
 {
     private Context context;
     private ArrayList<BluetoothDevice> devices = new ArrayList<>();
+    private ArrayList<BluetoothDevice> deviceListFiltered;
     private View.OnClickListener  onClickInterface;
 
     public MyRecyclerViewAdapter(Context context, ArrayList<BluetoothDevice> devices, View.OnClickListener onClickInterface) {
         this.context = context;
         this.devices = devices;
+        this.deviceListFiltered = devices;
         this.onClickInterface = onClickInterface;
     }
 
@@ -36,8 +41,8 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int i) {
-        viewHolder.tvDeviceName.setText(getDeviceName(devices.get(i)));
-        viewHolder.tvDeviceAddress.setText(devices.get(i).getAddress());
+        viewHolder.tvDeviceName.setText(getDeviceName(deviceListFiltered.get(i)));
+        viewHolder.tvDeviceAddress.setText(deviceListFiltered.get(i).getAddress());
         viewHolder.rowLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -46,9 +51,11 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         });
     }
 
+
+
     @Override
     public int getItemCount() {
-        return devices.size();
+        return deviceListFiltered.size();
     }
 
     public String getDeviceName(BluetoothDevice device)
@@ -62,6 +69,41 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 //            deviceId = device.getName();
 //        }
         return device.getName();
+    }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                String charString = charSequence.toString();
+                if (charString.isEmpty()) {
+                    deviceListFiltered = devices;
+                } else {
+                    ArrayList<BluetoothDevice> filteredList = new ArrayList<>();
+                    for (BluetoothDevice row : devices) {
+
+                        // name match condition. this might differ depending on your requirement
+                        // here we are looking for name or phone number match
+                        if (row.getName().toLowerCase().contains(charString.toLowerCase()) || row.getName().contains(charSequence)) {
+                            filteredList.add(row);
+                        }
+                    }
+
+                    deviceListFiltered = filteredList;
+                }
+
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = deviceListFiltered;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                deviceListFiltered = (ArrayList<BluetoothDevice>) filterResults.values;
+                notifyDataSetChanged();
+            }
+        };
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

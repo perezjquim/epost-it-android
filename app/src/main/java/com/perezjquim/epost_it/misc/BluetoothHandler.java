@@ -190,6 +190,7 @@ public class BluetoothHandler {
     public void writeMessage(String msg)
     {
         BluetoothWriter writer = new BluetoothWriter(service);
+        msg = createMessage("ASD",msg);
 
         writer.writeln(msg);
     }
@@ -202,6 +203,11 @@ public class BluetoothHandler {
             return (FindDevicesActivity) activity;
         }
         return null;
+    }
+
+    public String createMessage(String address, String msgCode)
+    {
+        return "EPOSTIT#"+address+"#"+msgCode+"#";
     }
 
     public void disconnect()

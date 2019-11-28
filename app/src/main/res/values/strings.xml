@@ -4,4 +4,5 @@
     <string name="scan_devices">Encontrar dispositivos</string>
     <string name="no_bluetooth">Este dispositivo não tem bluetooth.</string>
     <string name="no_device_name">Desconhecido</string>
+    <string name="action_search">Pesquisar</string>
 </resources>
