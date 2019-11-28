@@ -1,14 +1,25 @@
 package com.perezjquim.epost_it.misc;
 
+import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothGatt;
 import android.bluetooth.BluetoothSocket;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Handler;
 import android.os.ParcelUuid;
+import android.util.Log;
+import android.widget.Toast;
 
+import com.github.douglasjunior.bluetoothclassiclibrary.BluetoothClassicService;
+import com.github.douglasjunior.bluetoothclassiclibrary.BluetoothConfiguration;
+import com.github.douglasjunior.bluetoothclassiclibrary.BluetoothService;
+import com.github.douglasjunior.bluetoothclassiclibrary.BluetoothStatus;
+import com.github.douglasjunior.bluetoothclassiclibrary.BluetoothWriter;
+import com.github.douglasjunior.bluetoothlowenergylibrary.BluetoothLeService;
 import com.perezjquim.UIHelper;
 import com.perezjquim.epost_it.R;
 import com.perezjquim.epost_it.data.StorageHandler;
@@ -20,43 +31,103 @@ import java.io.OutputStream;
 import java.lang.reflect.Array;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class BluetoothHandler {
 
     private BluetoothAdapter adapter;
     private BroadcastReceiver mReceiver;
-    private FindDevicesActivity activity;
+    private FindDevicesActivity findDevicesActivityctivity;
+    private Activity activity;
     public final static int REQUEST_ENABLE_BT = 1;
-    private final int BUFFER_SIZE = 1024;
-    private ArrayList<BluetoothDevice> devicesPaired;
-    private ArrayList<BluetoothSocket> sockets;
+    private static final int BUFFER_SIZE = 1024;
+    private static ArrayList<BluetoothDevice> devicesPaired = new ArrayList<BluetoothDevice>();
+    private static ArrayList<BluetoothSocket> sockets = new ArrayList<BluetoothSocket>();
+    private static ArrayList<Handler> handlers = new ArrayList<Handler>();
+    private static ArrayList<Runnable> runnables = new ArrayList<Runnable>();
     private BluetoothHandler bluetoothHandler;
+///////////////////////////////////////////////////////////////////////////////////////////
+    private BluetoothConfiguration config;
+    private BluetoothService service;
+    private static final UUID UUID_DEVICE = UUID.fromString("00001101-0000-1000-8000-00805f9b34fb");
+    private static final UUID UUID_SERVICE = UUID.fromString("e7810a71-73ae-499d-8c15-faa9aef0c3f2");
+    private static final UUID UUID_CHARACTERISTIC = UUID.fromString("bef8d6c9-9c21-4c9e-b632-bd58c1009f9f");
 
-    public BluetoothHandler(FindDevicesActivity activity)
+    public BluetoothHandler(Context context)
     {
-        this.activity = activity;
-        this.adapter = BluetoothAdapter.getDefaultAdapter();
-        this.mReceiver = initializeReceiver();
-        this.devicesPaired = new ArrayList<BluetoothDevice>();
-        this.sockets = new ArrayList<BluetoothSocket>();
-        this.bluetoothHandler = this;
+        this.activity =  (Activity) context;
+        this.findDevicesActivityctivity = verifyFindDevicesActivity(this.activity);
+        this.config = new BluetoothConfiguration();
+        prepare();
     }
 
-    public void scanDevices()
+    public void prepare()
     {
-//        UIHelper.openProgressDialog(activity, "Scanning..");
+        this.config.context = this.activity;
+        this.config.bluetoothServiceClass = BluetoothClassicService.class;
+        this.config.bufferSize = 1024;
+        this.config.characterDelimiter = '\n';
+        this.config.deviceName = "Bluetooth Sample";
+        this.config.callListenersInMainThread = true;
 
-        IntentFilter filter = new IntentFilter();
+        //config.uuid = null; // When using BluetoothLeService.class set null to show all devices on scan.
+        this.config.uuid = UUID_DEVICE; // For Classic
 
-        filter.addAction(BluetoothDevice.ACTION_FOUND);
-        filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_STARTED);
-        filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
+        this.config.uuidService = UUID_SERVICE; // For BLE
+        this.config.uuidCharacteristic = UUID_CHARACTERISTIC; // For BLE
+        this.config.transport = BluetoothDevice.TRANSPORT_LE; // Only for dual-mode devices
 
-        activity.registerReceiver(mReceiver, filter);
-        adapter.startDiscovery();
+        // For BLE
+//        this.config.connectionPriority = BluetoothGatt.CONNECTION_PRIORITY_HIGH; // Automatically request connection priority just after connection is through.
+        //or request connection priority manually, mService.requestConnectionPriority(BluetoothGatt.CONNECTION_PRIORITY_HIGH);
+
+        BluetoothService.init(config);
+        service = BluetoothService.getDefaultInstance();
+        prepareScan();
     }
 
-    public int bluetoothState()
+    private void prepareScan()
+    {
+        int state = checkState();
+        if(state == -1){//Bluetooth active
+            UIHelper.toast(activity, activity.getString(R.string.no_bluetooth));
+            return;
+        } else if( state == 1)
+        {
+            service.startScan();
+        }
+
+        service.setOnScanCallback(new BluetoothService.OnBluetoothScanCallback() {
+            @Override
+            public void onDeviceDiscovered(BluetoothDevice device, int rssi) {
+                if(findDevicesActivityctivity != null) {
+                    findDevicesActivityctivity.addDevice(device);
+                }
+            }
+            @Override
+            public void onStartScan() {
+                Toast.makeText(activity, "Scanning start...", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onStopScan() {
+                Toast.makeText(activity, "Scanning stop...", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
+    public void startScan()
+    {
+        int state = checkState();
+        if(state == -1){//Bluetooth active
+            UIHelper.toast(activity, activity.getString(R.string.no_bluetooth));
+            return;
+        }
+        service.startScan();
+    }
+
+    private int checkState()
     {
         BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         if (mBluetoothAdapter == null) {
@@ -68,121 +139,74 @@ public class BluetoothHandler {
             activity.startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
             return 0;
         }else{
+//            service.startScan();
             return 1;
         }
     }
 
-    private BroadcastReceiver initializeReceiver()
+    public void initConnection(BluetoothDevice device)
     {
-        return mReceiver = new BroadcastReceiver() {
-            public void onReceive(Context context, Intent intent) {
-                String action = intent.getAction();
+        service.setOnEventCallback(new BluetoothService.OnBluetoothEventCallback() {
+            @Override
+            public void onDataRead(byte[] buffer, int length) {
+               String s = new String(buffer, 0, length) + "\n";
+                Toast.makeText(activity, s , Toast.LENGTH_SHORT).show();
+            }
 
-                if (BluetoothAdapter.ACTION_DISCOVERY_STARTED.equals(action)) {
-                    //discovery starts, we can show progress dialog or perform other tasks
-                } else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
-                    //discovery finishes, dismis progress dialog
-//                    UIHelper.closeProgressDialog(activity);
-                } else if (BluetoothDevice.ACTION_FOUND.equals(action)) {
-                    //bluetooth device found
-                    BluetoothDevice device = (BluetoothDevice) intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-                    activity.addDevice(device);
-                }
-                //pair/unpair device
-                else if (BluetoothDevice.ACTION_BOND_STATE_CHANGED.equals(action)) {
-                    final int state        = intent.getIntExtra(BluetoothDevice.EXTRA_BOND_STATE, BluetoothDevice.ERROR);
-                    final int prevState    = intent.getIntExtra(BluetoothDevice.EXTRA_PREVIOUS_BOND_STATE, BluetoothDevice.ERROR);
-
-                    BluetoothDevice device = (BluetoothDevice) intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-                    if (state == BluetoothDevice.BOND_BONDED && prevState == BluetoothDevice.BOND_BONDING) {
-                        try {
-                            bluetoothHandler.createBluetoothSocket(device);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        UIHelper.toast(context, "Paired");
-                        String name = device.getName();
-                        if(name == null || name.equals("")){
-                            name = context.getResources().getString(R.string.no_device_name);
-                        }
-                        StorageHandler.insertEPostIt(device.getAddress(),name);
-                        //remover o device da lista de devices
-                    } else if (state == BluetoothDevice.BOND_NONE && prevState == BluetoothDevice.BOND_BONDED){
-                        UIHelper.toast(context, "Unpaired");
-                        StorageHandler.deleteEPostIt(device.getAddress());
+            @Override
+            public void onStatusChange(BluetoothStatus status) {
+                if (status == BluetoothStatus.CONNECTED) {
+                    String name = device.getName();
+                    if(name == null || name.equals("")){
+                        name = activity.getResources().getString(R.string.no_device_name);
                     }
-
+                    StorageHandler.insertEPostIt(device.getAddress(),name);
+                    //remover o device da lista de devices
+                    if(findDevicesActivityctivity != null) {
+                        findDevicesActivityctivity.removeDevice(device);
+                    }
+                    devicesPaired.add(device);
+                    UIHelper.toast(activity, "Paired");
+                    writeMessage("@");
                 }
             }
-        };
-    }
 
-    public void pairDevice(BluetoothDevice device)
-    {
-        try {
-            Method method = device.getClass().getMethod("createBond", (Class[]) null);
-            method.invoke(device, (Object[]) null);
-            IntentFilter intent = new IntentFilter(BluetoothDevice.ACTION_BOND_STATE_CHANGED);
-            activity.registerReceiver(mReceiver, intent);
-
-//            StorageHandler.insertEPostIt(device.getAddress());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void unpairDevice(BluetoothDevice device) {
-        try {
-            Method method = device.getClass().getMethod("removeBond", (Class[]) null);
-            method.invoke(device, (Object[]) null);
-
-//            StorageHandler.deleteEPostIt(device.getAddress());
-
-        } catch (Exception e) {
-            e.printStackTrace();
-    }
-    }
-
-    private void createBluetoothSocket(BluetoothDevice device) throws IOException {
-        ParcelUuid[] uuids = device.getUuids();
-        BluetoothSocket socket = device.createRfcommSocketToServiceRecord(uuids[0].getUuid());
-        socket.connect();
-        OutputStream outputStream = socket.getOutputStream();
-        InputStream inStream = socket.getInputStream();
-        //save sockets
-        this.devicesPaired.add(device);
-        this.sockets.add(socket);
-        this.createReadThread(inStream);
-    }
-
-    public void write(String s, OutputStream outputStream) throws IOException {
-        outputStream.write(s.getBytes());
-    }
-
-    public void createReadThread(InputStream inputStream)
-    {
-        byte[] buffer = new byte[BUFFER_SIZE];
-
-        new Thread(new Runnable() {
-            public void run() {
-                int bytes = 0;
-                try {
-                    //Message received saved in buffer
-                    bytes = inputStream.read(buffer, bytes, BUFFER_SIZE - bytes);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+            @Override
+            public void onDeviceName(String deviceName) {
             }
-        }).start();
+
+            @Override
+            public void onToast(String message) {
+            }
+
+            @Override
+            public void onDataWrite(byte[] buffer) {
+//                Toast.makeText(activity, new String(buffer), Toast.LENGTH_SHORT).show();
+            }
+        });
+        service.connect(device); // See also service.disconnect();
     }
 
-    private void messageType(int messageCode)
+    public void writeMessage(String msg)
     {
-        switch (messageCode)
+        BluetoothWriter writer = new BluetoothWriter(service);
+
+        writer.writeln(msg);
+    }
+
+    private FindDevicesActivity verifyFindDevicesActivity(Activity activity)
+    {
+        Log.i("CLASSNAME",activity.getClass().getSimpleName());
+        if(activity.getClass().getSimpleName().equals("FindDevicesActivity"))
         {
-            case 1: break; //Push Button press
-            case 2: break; //Filter
+            return (FindDevicesActivity) activity;
         }
+        return null;
     }
-    public BroadcastReceiver getMReceiver(){return this.mReceiver;}
+
+    public void disconnect()
+    {
+        service.disconnect();
+    }
+
 }

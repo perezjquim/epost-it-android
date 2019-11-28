@@ -29,7 +29,7 @@ public class MainActivity extends GenericActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        StorageHandler.test();
+//        StorageHandler.test();
         epostit_list = new ArrayList<>(StorageHandler.getAllEPostIts());
         //System.out.println(epostit_list.size());
         this.initializeRecycleView();

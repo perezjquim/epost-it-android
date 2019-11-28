@@ -4,6 +4,7 @@ import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
@@ -29,12 +30,20 @@ public class FindDevicesActivity extends GenericActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_devices);
         bluetoothHandler = new BluetoothHandler(this);
-        int bluetoothState = bluetoothHandler.bluetoothState();
-        if(bluetoothState == 1){//Bluetooth active
-            bluetoothHandler.scanDevices();
-        }else if(bluetoothState == -1){//No support bluetooth
-            UIHelper.toast(this, getString(R.string.no_bluetooth));
-        }
+        final SwipeRefreshLayout pullToRefresh = findViewById(R.id.pullToRefresh);
+        pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                bluetoothHandler.startScan(); // your code
+                pullToRefresh.setRefreshing(false);
+            }
+        });
+//        int bluetoothState = bluetoothHandler.checkState();
+//        if(bluetoothState == 1){//Bluetooth active
+//            bluetoothHandler = new BluetoothHandler(this);
+//        }else if(bluetoothState == -1){//No support bluetooth
+//            UIHelper.toast(this, getString(R.string.no_bluetooth));
+//        }
 
         devices = new ArrayList<BluetoothDevice>();
         initializeRecycleView();
@@ -48,7 +57,7 @@ public class FindDevicesActivity extends GenericActivity
                         ViewGroup parent = (ViewGroup) selection.getParent();
                         int position = parent.indexOfChild(selection);
                         UIHelper.toast(this, "Position " + position);
-                        bluetoothHandler.pairDevice(this.devices.get(position));
+                        bluetoothHandler.initConnection(this.devices.get(position));
                 });
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -59,14 +68,15 @@ public class FindDevicesActivity extends GenericActivity
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == BluetoothHandler.REQUEST_ENABLE_BT)
         {
-            bluetoothHandler.scanDevices();
+            bluetoothHandler.startScan();
         }
     }
 
     @Override
     protected void onDestroy() {
-        unregisterReceiver(bluetoothHandler.getMReceiver());
+
         super.onDestroy();
+                bluetoothHandler.disconnect();
     }
 
     public void addDevice(BluetoothDevice device)
@@ -74,10 +84,21 @@ public class FindDevicesActivity extends GenericActivity
         boolean alreadyExists = StorageHandler.doesPostItExist(device.getAddress());
 
 //        if(!this.devices.contains(device)) {
-        if(!alreadyExists && !this.devices.contains(device))
+//        if(!alreadyExists && !this.devices.contains(device))
+        if(!this.devices.contains(device))
         {
             this.devices.add(device);
             adapter.notifyItemInserted(this.devices.size() - 1);
+        }
+    }
+
+    public void removeDevice (BluetoothDevice device)
+    {
+        if(this.devices.contains(device))
+        {
+            int position = this.devices.indexOf(device);
+            this.devices.remove(device);
+            adapter.notifyItemRemoved(position);
         }
     }
 }
