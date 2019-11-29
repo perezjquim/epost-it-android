@@ -29,7 +29,7 @@ public class MainActivity extends GenericActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        StorageHandler.test();
+        StorageHandler.test();
         epostit_list = new ArrayList<>(StorageHandler.getAllEPostIts());
         //System.out.println(epostit_list.size());
         this.initializeRecycleView();
@@ -48,7 +48,7 @@ public class MainActivity extends GenericActivity
         {
             ViewGroup parent = (ViewGroup) selection.getParent();
             int position = parent.indexOfChild(selection);
-            UIHelper.toast(this, "Position " + position);
+//            UIHelper.toast(this, "Position " + position);
         });
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

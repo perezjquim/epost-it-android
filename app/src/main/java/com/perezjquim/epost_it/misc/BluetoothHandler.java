@@ -19,7 +19,6 @@ import com.github.douglasjunior.bluetoothclassiclibrary.BluetoothConfiguration;
 import com.github.douglasjunior.bluetoothclassiclibrary.BluetoothService;
 import com.github.douglasjunior.bluetoothclassiclibrary.BluetoothStatus;
 import com.github.douglasjunior.bluetoothclassiclibrary.BluetoothWriter;
-import com.github.douglasjunior.bluetoothlowenergylibrary.BluetoothLeService;
 import com.perezjquim.UIHelper;
 import com.perezjquim.epost_it.R;
 import com.perezjquim.epost_it.data.StorageHandler;
@@ -35,20 +34,13 @@ import java.util.UUID;
 
 public class BluetoothHandler {
 
-    private BluetoothAdapter adapter;
-    private BroadcastReceiver mReceiver;
     private FindDevicesActivity findDevicesActivityctivity;
     private Activity activity;
     public final static int REQUEST_ENABLE_BT = 1;
-    private static final int BUFFER_SIZE = 1024;
     private static ArrayList<BluetoothDevice> devicesPaired = new ArrayList<BluetoothDevice>();
-    private static ArrayList<BluetoothSocket> sockets = new ArrayList<BluetoothSocket>();
-    private static ArrayList<Handler> handlers = new ArrayList<Handler>();
-    private static ArrayList<Runnable> runnables = new ArrayList<Runnable>();
-    private BluetoothHandler bluetoothHandler;
-///////////////////////////////////////////////////////////////////////////////////////////
     private BluetoothConfiguration config;
     private BluetoothService service;
+    private BluetoothWriter writer;
     private static final UUID UUID_DEVICE = UUID.fromString("00001101-0000-1000-8000-00805f9b34fb");
     private static final UUID UUID_SERVICE = UUID.fromString("e7810a71-73ae-499d-8c15-faa9aef0c3f2");
     private static final UUID UUID_CHARACTERISTIC = UUID.fromString("bef8d6c9-9c21-4c9e-b632-bd58c1009f9f");
@@ -57,32 +49,32 @@ public class BluetoothHandler {
     {
         this.activity =  (Activity) context;
         this.findDevicesActivityctivity = verifyFindDevicesActivity(this.activity);
-        this.config = new BluetoothConfiguration();
         prepare();
     }
 
     public void prepare()
     {
-        this.config.context = this.activity;
+        this.config = new BluetoothConfiguration();
         this.config.bluetoothServiceClass = BluetoothClassicService.class;
-        this.config.bufferSize = 1024;
+        this.config.context = this.activity.getApplicationContext();
+        this.config.bufferSize = 2048;
         this.config.characterDelimiter = '\n';
         this.config.deviceName = "Bluetooth Sample";
         this.config.callListenersInMainThread = true;
 
-        //config.uuid = null; // When using BluetoothLeService.class set null to show all devices on scan.
         this.config.uuid = UUID_DEVICE; // For Classic
+
 
         this.config.uuidService = UUID_SERVICE; // For BLE
         this.config.uuidCharacteristic = UUID_CHARACTERISTIC; // For BLE
         this.config.transport = BluetoothDevice.TRANSPORT_LE; // Only for dual-mode devices
 
-        // For BLE
-//        this.config.connectionPriority = BluetoothGatt.CONNECTION_PRIORITY_HIGH; // Automatically request connection priority just after connection is through.
-        //or request connection priority manually, mService.requestConnectionPriority(BluetoothGatt.CONNECTION_PRIORITY_HIGH);
-
         BluetoothService.init(config);
+
         service = BluetoothService.getDefaultInstance();
+
+        this.writer = new BluetoothWriter(service);
+
         prepareScan();
     }
 
@@ -167,7 +159,8 @@ public class BluetoothHandler {
                     }
                     devicesPaired.add(device);
                     UIHelper.toast(activity, "Paired");
-                    writeMessage("@");
+
+                    writeMessage("test");
                 }
             }
 
@@ -181,18 +174,16 @@ public class BluetoothHandler {
 
             @Override
             public void onDataWrite(byte[] buffer) {
-//                Toast.makeText(activity, new String(buffer), Toast.LENGTH_SHORT).show();
             }
         });
-        service.connect(device); // See also service.disconnect();
+        service.connect(device);
     }
 
-    public void writeMessage(String msg)
+    public void writeMessage(String aMsg)
     {
-        BluetoothWriter writer = new BluetoothWriter(service);
-        msg = createMessage("ASD",msg);
+        final String msg = createMessage("SEARCH",aMsg);
 
-        writer.writeln(msg);
+        UIHelper.runOnUiThread(() -> writer.writeln(msg));
     }
 
     private FindDevicesActivity verifyFindDevicesActivity(Activity activity)
@@ -205,9 +196,9 @@ public class BluetoothHandler {
         return null;
     }
 
-    public String createMessage(String address, String msgCode)
+    public String createMessage(String action, String msgCode)
     {
-        return "EPOSTIT#"+address+"#"+msgCode+"#";
+        return "EPOSTIT"+"#"+action+"#"+msgCode;
     }
 
     public void disconnect()
