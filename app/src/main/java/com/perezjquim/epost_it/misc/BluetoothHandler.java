@@ -3,18 +3,11 @@ package com.perezjquim.epost_it.misc;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothGatt;
-import android.bluetooth.BluetoothSocket;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.os.Handler;
-import android.os.ParcelUuid;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.github.douglasjunior.bluetoothclassiclibrary.BluetoothClassicService;
 import com.github.douglasjunior.bluetoothclassiclibrary.BluetoothConfiguration;
 import com.github.douglasjunior.bluetoothclassiclibrary.BluetoothService;
 import com.github.douglasjunior.bluetoothclassiclibrary.BluetoothStatus;
@@ -24,15 +17,10 @@ import com.perezjquim.epost_it.R;
 import com.perezjquim.epost_it.data.StorageHandler;
 import com.perezjquim.epost_it.view.FindDevicesActivity;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.lang.reflect.Array;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.UUID;
+import java.util.*;
 
-public class BluetoothHandler {
+public class BluetoothHandler
+{
 
     private FindDevicesActivity findDevicesActivityctivity;
     private Activity activity;
@@ -41,7 +29,7 @@ public class BluetoothHandler {
     private BluetoothConfiguration config;
     private BluetoothService mainService;
     private ArrayList<BluetoothService> clientServices;
-    private ArrayList<BluetoothWriter> writers;
+    private HashMap<BluetoothService,BluetoothWriter> writers;
     private BluetoothWriter writer;
     private static final UUID UUID_DEVICE = UUID.fromString("00001101-0000-1000-8000-00805f9b34fb");
     private static final UUID UUID_SERVICE = UUID.fromString("e7810a71-73ae-499d-8c15-faa9aef0c3f2");
@@ -49,7 +37,7 @@ public class BluetoothHandler {
 
     public BluetoothHandler(Context context)
     {
-        this.activity =  (Activity) context;
+        this.activity = (Activity) context;
         this.findDevicesActivityctivity = verifyFindDevicesActivity(this.activity);
         prepare();
     }
@@ -77,7 +65,7 @@ public class BluetoothHandler {
 
 //        service = new BluetoothServiceExt(config);
         clientServices = new ArrayList<>();
-        writers = new ArrayList<>();
+        writers = new HashMap<>();
 
 //        this.writer = new BluetoothWriter(service);
 
@@ -87,29 +75,38 @@ public class BluetoothHandler {
     private void prepareScan()
     {
         int state = checkState();
-        if(state == -1){//Bluetooth active
+        if (state == -1)
+        {//Bluetooth active
             UIHelper.toast(activity, activity.getString(R.string.no_bluetooth));
             return;
-        } else if( state == 1)
+        } else if (state == 1)
         {
             mainService.startScan();
         }
 
-        mainService.setOnScanCallback(new BluetoothService.OnBluetoothScanCallback() {
+        mainService.setOnScanCallback(new BluetoothService.OnBluetoothScanCallback()
+        {
             @Override
-            public void onDeviceDiscovered(BluetoothDevice device, int rssi) {
-                if(findDevicesActivityctivity != null) {
+            public void onDeviceDiscovered(BluetoothDevice device, int rssi)
+            {
+                if (findDevicesActivityctivity != null)
+                {
                     findDevicesActivityctivity.addDevice(device);
                 }
             }
+
             @Override
-            public void onStartScan() {
-                Toast.makeText(activity, "Scanning start...", Toast.LENGTH_SHORT).show();
+            public void onStartScan()
+            {
+                UIHelper.toast(activity,"Scanning start...");
+                System.out.println("-- BT -- SCAN START");
             }
 
             @Override
-            public void onStopScan() {
-                Toast.makeText(activity, "Scanning stop...", Toast.LENGTH_SHORT).show();
+            public void onStopScan()
+            {
+                UIHelper.toast(activity,"Scanning stop...");
+                System.out.println("-- BT -- SCAN STOP");
             }
         });
 
@@ -118,7 +115,8 @@ public class BluetoothHandler {
     public void startScan()
     {
         int state = checkState();
-        if(state == -1){//Bluetooth active
+        if (state == -1)
+        {//Bluetooth active
             UIHelper.toast(activity, activity.getString(R.string.no_bluetooth));
             return;
         }
@@ -128,15 +126,18 @@ public class BluetoothHandler {
     private int checkState()
     {
         BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        if (mBluetoothAdapter == null) {
+        if (mBluetoothAdapter == null)
+        {
             // Device does not support Bluetooth
             return -1;
         }
-        if (!mBluetoothAdapter.isEnabled()) {
+        if (!mBluetoothAdapter.isEnabled())
+        {
             Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             activity.startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
             return 0;
-        }else{
+        } else
+        {
 //            service.startScan();
             return 1;
         }
@@ -150,44 +151,66 @@ public class BluetoothHandler {
 
         BluetoothWriter writer = new BluetoothWriter(service);
 
-        writers.add(writer);
+        writers.put(service,writer);
 
-        service.setOnEventCallback(new BluetoothService.OnBluetoothEventCallback() {
+        service.setOnEventCallback(new BluetoothService.OnBluetoothEventCallback()
+        {
             @Override
-            public void onDataRead(byte[] buffer, int length) {
-               String s = new String(buffer, 0, length) + "\n";
-                Toast.makeText(activity, s , Toast.LENGTH_SHORT).show();
+            public void onDataRead(byte[] buffer, int length)
+            {
+                String s = new String(buffer, 0, length) + "\n";
+                UIHelper.toast(activity,s);
+
+                System.out.println("-- BT -- READ: "+s);
             }
 
             @Override
-            public void onStatusChange(BluetoothStatus status) {
-                if (status == BluetoothStatus.CONNECTED) {
+            public void onStatusChange(BluetoothStatus status)
+            {
+                if(status == BluetoothStatus.CONNECTED)
+                {
                     String name = device.getName();
-                    if(name == null || name.equals("")){
+                    if (name == null || name.equals(""))
+                    {
                         name = activity.getResources().getString(R.string.no_device_name);
                     }
-                    StorageHandler.insertEPostIt(device.getAddress(),name);
+                    StorageHandler.insertEPostIt(device.getAddress(), name);
                     //remover o device da lista de devices
-                    if(findDevicesActivityctivity != null) {
+                    if (findDevicesActivityctivity != null)
+                    {
                         findDevicesActivityctivity.removeDevice(device);
                     }
                     devicesPaired.add(device);
                     UIHelper.toast(activity, "Paired");
 
-                    writeMessage("test");
+                    System.out.println("-- BT -- PAIRED");
+
+                } else if( status == BluetoothStatus.NONE )
+                {
+                        devicesPaired.remove(device);
+                        clientServices.remove(service);
+                        writers.remove(service);
+                        UIHelper.toast(activity, "Unpaired");
+
+                    System.out.println("-- BT -- CONNECTION LOST / UNPAIRED");
                 }
             }
 
             @Override
-            public void onDeviceName(String deviceName) {
+            public void onDeviceName(String deviceName)
+            {
             }
 
             @Override
-            public void onToast(String message) {
+            public void onToast(String message)
+            {
             }
 
             @Override
-            public void onDataWrite(byte[] buffer) {
+            public void onDataWrite(byte[] buffer)
+            {
+                String s = new String(buffer);
+                System.out.println("-- BT -- WRITE:" + s);
             }
         });
 
@@ -196,18 +219,19 @@ public class BluetoothHandler {
 
     public void writeMessage(String aMsg)
     {
-        final String msg = createMessage("SEARCH",aMsg);
+        String msg = createMessage("SEARCH", aMsg);
 
-        for( BluetoothWriter w : writers)
+        for(Map.Entry<BluetoothService, BluetoothWriter> entry : writers.entrySet())
         {
+            BluetoothWriter w = entry.getValue();
             w.writeln(msg);
         }
     }
 
     private FindDevicesActivity verifyFindDevicesActivity(Activity activity)
     {
-        Log.i("CLASSNAME",activity.getClass().getSimpleName());
-        if(activity.getClass().getSimpleName().equals("FindDevicesActivity"))
+        Log.i("CLASSNAME", activity.getClass().getSimpleName());
+        if (activity.getClass().getSimpleName().equals("FindDevicesActivity"))
         {
             return (FindDevicesActivity) activity;
         }
@@ -216,7 +240,7 @@ public class BluetoothHandler {
 
     public String createMessage(String action, String msgCode)
     {
-        return "EPOSTIT"+"#"+action+"#"+msgCode;
+        return "EPOSTIT" + "#" + action + "#" + msgCode;
     }
 
     public void disconnect()

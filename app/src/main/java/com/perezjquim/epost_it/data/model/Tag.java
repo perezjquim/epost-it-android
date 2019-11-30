@@ -8,7 +8,9 @@ public class Tag extends SugarRecord
 
     private String desc;
 
-    public Tag() {}
+    public Tag()
+    {
+    }
 
     public Tag(String desc)
     {

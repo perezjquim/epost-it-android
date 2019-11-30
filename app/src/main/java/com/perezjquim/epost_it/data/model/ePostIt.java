@@ -10,7 +10,9 @@ public class ePostIt extends SugarRecord
     private boolean is_active;
     private String name;
 
-    public ePostIt() {}
+    public ePostIt()
+    {
+    }
 
     public ePostIt(String bt_addr, boolean is_active, String name)
     {

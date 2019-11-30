@@ -25,7 +25,9 @@ public class Alert extends SugarRecord
 
     private boolean is_active;
 
-    public Alert() {}
+    public Alert()
+    {
+    }
 
     public Alert(ePostIt epost_it, Date begin_date, Date end_date, Time alert_time, boolean is_mon, boolean is_tue, boolean is_wed, boolean is_thu, boolean is_fri, boolean is_sat, boolean is_sun, boolean is_active)
     {
