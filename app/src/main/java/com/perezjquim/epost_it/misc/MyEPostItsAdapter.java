@@ -14,13 +14,13 @@ import com.perezjquim.epost_it.data.model.ePostIt;
 
 import java.util.ArrayList;
 
-public class MyEPostItsViewAdapter extends RecyclerView.Adapter<MyEPostItsViewAdapter.ViewHolder>
+public class MyEPostItsAdapter extends RecyclerView.Adapter<MyEPostItsAdapter.ViewHolder>
 {
     private Context context;
     private ArrayList<ePostIt> ePostIts = new ArrayList<ePostIt>();
     private View.OnClickListener onClickInterface;
 
-    public MyEPostItsViewAdapter(Context context, ArrayList<ePostIt> ePostIts, View.OnClickListener onClickInterface)
+    public MyEPostItsAdapter(Context context, ArrayList<ePostIt> ePostIts, View.OnClickListener onClickInterface)
     {
         this.context = context;
         this.ePostIts = ePostIts;
@@ -29,15 +29,15 @@ public class MyEPostItsViewAdapter extends RecyclerView.Adapter<MyEPostItsViewAd
 
     @NonNull
     @Override
-    public MyEPostItsViewAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i)
+    public MyEPostItsAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i)
     {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.rv_my_epostits, viewGroup, false);
-        MyEPostItsViewAdapter.ViewHolder holder = new MyEPostItsViewAdapter.ViewHolder(view);
+        MyEPostItsAdapter.ViewHolder holder = new MyEPostItsAdapter.ViewHolder(view);
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(MyEPostItsViewAdapter.ViewHolder viewHolder, final int i)
+    public void onBindViewHolder(MyEPostItsAdapter.ViewHolder viewHolder, final int i)
     {
         viewHolder.ePostItName.setText(this.ePostIts.get(i).getName());
         viewHolder.ePostItBTAddress.setText(this.ePostIts.get(i).getBTAddress());

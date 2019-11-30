@@ -11,25 +11,24 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.ViewGroup;
 
 import com.perezjquim.UIHelper;
 import com.perezjquim.epost_it.R;
 import com.perezjquim.epost_it.data.StorageHandler;
 import com.perezjquim.epost_it.misc.BluetoothHandler;
+import com.perezjquim.epost_it.misc.FindDevicesAdapter;
 import com.perezjquim.epost_it.misc.GenericActivity;
-import com.perezjquim.epost_it.misc.MyRecyclerViewAdapter;
 
 import java.util.ArrayList;
 
 public class FindDevicesActivity extends GenericActivity
 {
-    private static BluetoothHandler bluetoothHandler;
-    private static ArrayList<BluetoothDevice> devices;
+    private BluetoothHandler bluetoothHandler;
+    private ArrayList<BluetoothDevice> devices;
     private RecyclerView recyclerView;
-    private MyRecyclerViewAdapter adapter;
-    private SearchView searchView;
+    private FindDevicesAdapter adapter;
+    private SearchView _searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -57,11 +56,11 @@ public class FindDevicesActivity extends GenericActivity
     private void initializeRecycleView()
     {
         this.recyclerView = findViewById(R.id.rvDevices);
-        this.adapter = new MyRecyclerViewAdapter(this, this.devices, (selection) ->
+        this.adapter = new FindDevicesAdapter(this, this.devices, (selection) ->
         {
             ViewGroup parent = (ViewGroup) selection.getParent();
             int position = parent.indexOfChild(selection);
-            UIHelper.toast(this, "Position " + position);
+//            UIHelper.toast(this, "Position " + position);
             bluetoothHandler.initConnection(this.devices.get(position));
         });
         recyclerView.setAdapter(adapter);
@@ -104,30 +103,30 @@ public class FindDevicesActivity extends GenericActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        super.onCreateOptionsMenu(menu);
 
         // Associate searchable configuration with the SearchView
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        searchView = (SearchView) menu.findItem(R.id.action_search)
+        _searchView = (SearchView) menu.findItem(R.id.action_search)
                 .getActionView();
 
-        searchView.setSearchableInfo(searchManager
+        _searchView.setSearchableInfo(searchManager
                 .getSearchableInfo(getComponentName()));
 
-        searchView.setMaxWidth(Integer.MAX_VALUE);
+        _searchView.setMaxWidth(Integer.MAX_VALUE);
 
         // listening to search query text change
 
-        FindDevicesActivity a = this;
+        Context c = this;
 
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener()
+        _searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener()
         {
             @Override
             public boolean onQueryTextSubmit(String query)
             {
-                UIHelper.toast(a, query);
+                UIHelper.toast(c, query);
                 adapter.getFilter().filter(query);
-                bluetoothHandler.writeMessage(query);
+//                bluetoothHandler.writeMessage(query);
                 return true;
             }
 
@@ -143,19 +142,14 @@ public class FindDevicesActivity extends GenericActivity
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item)
+    public void onBackPressed()
     {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_search)
+        // close search view on back button pressed
+        if (!_searchView.isIconified())
         {
-            return true;
+            _searchView.setIconified(true);
+            return;
         }
-
-        return super.onOptionsItemSelected(item);
+        super.onBackPressed();
     }
 }

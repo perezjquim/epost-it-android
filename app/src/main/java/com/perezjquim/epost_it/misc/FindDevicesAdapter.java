@@ -16,14 +16,14 @@ import com.perezjquim.epost_it.R;
 
 import java.util.ArrayList;
 
-public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> implements Filterable
+public class FindDevicesAdapter extends RecyclerView.Adapter<FindDevicesAdapter.ViewHolder> implements Filterable
 {
     private Context context;
     private ArrayList<BluetoothDevice> devices = new ArrayList<>();
     private ArrayList<BluetoothDevice> deviceListFiltered;
     private View.OnClickListener onClickInterface;
 
-    public MyRecyclerViewAdapter(Context context, ArrayList<BluetoothDevice> devices, View.OnClickListener onClickInterface)
+    public FindDevicesAdapter(Context context, ArrayList<BluetoothDevice> devices, View.OnClickListener onClickInterface)
     {
         this.context = context;
         this.devices = devices;
@@ -95,11 +95,11 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
                     for (BluetoothDevice row : devices)
                     {
                         String rowName = row.getName();
-                        if(
+                        if (
                                 (rowName != null)
-                                &&
-                                ( rowName.toLowerCase().contains(charString.toLowerCase()) || rowName.contains(charSequence) )
-                        )
+                                        &&
+                                        (rowName.toLowerCase().contains(charString.toLowerCase()) || rowName.contains(charSequence))
+                                )
                         {
                             filteredList.add(row);
                         }
