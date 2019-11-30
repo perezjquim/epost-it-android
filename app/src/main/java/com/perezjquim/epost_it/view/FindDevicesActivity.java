@@ -33,18 +33,24 @@ public class FindDevicesActivity extends GenericActivity
     private SearchView searchView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_devices);
-        bluetoothHandler = new BluetoothHandler(this);
-        final SwipeRefreshLayout pullToRefresh = findViewById(R.id.pullToRefresh);
-        pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                bluetoothHandler.startScan(); // your code
-                pullToRefresh.setRefreshing(false);
-            }
-        });
+
+        if(savedInstanceState == null)
+        {
+            bluetoothHandler = new BluetoothHandler(this);
+            final SwipeRefreshLayout pullToRefresh = findViewById(R.id.pullToRefresh);
+            pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener()
+            {
+                @Override
+                public void onRefresh()
+                {
+                    bluetoothHandler.startScan(); // your code
+                    pullToRefresh.setRefreshing(false);
+                }
+            });
 //        int bluetoothState = bluetoothHandler.checkState();
 //        if(bluetoothState == 1){//Bluetooth active
 //            bluetoothHandler = new BluetoothHandler(this);
@@ -52,8 +58,9 @@ public class FindDevicesActivity extends GenericActivity
 //            UIHelper.toast(this, getString(R.string.no_bluetooth));
 //        }
 
-        devices = new ArrayList<BluetoothDevice>();
-        initializeRecycleView();
+            devices = new ArrayList<BluetoothDevice>();
+            initializeRecycleView();
+        }
     }
 
     private void initializeRecycleView()
@@ -81,8 +88,8 @@ public class FindDevicesActivity extends GenericActivity
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
-                bluetoothHandler.disconnect();
+//        super.onDestroy();
+//                bluetoothHandler.disconnect();
     }
 
     public void addDevice(BluetoothDevice device)
@@ -155,5 +162,16 @@ public class FindDevicesActivity extends GenericActivity
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onBackPressed()
+    {
+        if( !searchView.isIconified())
+        {
+            searchView.setIconified(true);
+            return;
+        }
+
+        super.onBackPressed();
     }
 }

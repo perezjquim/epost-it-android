@@ -55,7 +55,14 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
     @Override
     public int getItemCount() {
-        return deviceListFiltered.size();
+        if(deviceListFiltered != null)
+        {
+            return deviceListFiltered.size();
+        }
+        else
+        {
+            return 0;
+        }
     }
 
     public String getDeviceName(BluetoothDevice device)
@@ -79,7 +86,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
                 String charString = charSequence.toString();
                 if (charString.isEmpty()) {
                     deviceListFiltered = devices;
-                } else {
+                } else if(charString != null){
                     ArrayList<BluetoothDevice> filteredList = new ArrayList<>();
                     for (BluetoothDevice row : devices) {
 
@@ -101,7 +108,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
             @Override
             protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
                 deviceListFiltered = (ArrayList<BluetoothDevice>) filterResults.values;
-                notifyDataSetChanged();
+//                notifyDataSetChanged();
             }
         };
     }

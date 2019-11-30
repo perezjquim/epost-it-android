@@ -39,7 +39,9 @@ public class BluetoothHandler {
     public final static int REQUEST_ENABLE_BT = 1;
     private static ArrayList<BluetoothDevice> devicesPaired = new ArrayList<BluetoothDevice>();
     private BluetoothConfiguration config;
-    private BluetoothService service;
+    private BluetoothService mainService;
+    private ArrayList<BluetoothService> clientServices;
+    private ArrayList<BluetoothWriter> writers;
     private BluetoothWriter writer;
     private static final UUID UUID_DEVICE = UUID.fromString("00001101-0000-1000-8000-00805f9b34fb");
     private static final UUID UUID_SERVICE = UUID.fromString("e7810a71-73ae-499d-8c15-faa9aef0c3f2");
@@ -55,7 +57,7 @@ public class BluetoothHandler {
     public void prepare()
     {
         this.config = new BluetoothConfiguration();
-        this.config.bluetoothServiceClass = BluetoothClassicService.class;
+        this.config.bluetoothServiceClass = BluetoothServiceExt.class;
         this.config.context = this.activity.getApplicationContext();
         this.config.bufferSize = 2048;
         this.config.characterDelimiter = '\n';
@@ -71,9 +73,13 @@ public class BluetoothHandler {
 
         BluetoothService.init(config);
 
-        service = BluetoothService.getDefaultInstance();
+        mainService = BluetoothService.getDefaultInstance();
 
-        this.writer = new BluetoothWriter(service);
+//        service = new BluetoothServiceExt(config);
+        clientServices = new ArrayList<>();
+        writers = new ArrayList<>();
+
+//        this.writer = new BluetoothWriter(service);
 
         prepareScan();
     }
@@ -86,10 +92,10 @@ public class BluetoothHandler {
             return;
         } else if( state == 1)
         {
-            service.startScan();
+            mainService.startScan();
         }
 
-        service.setOnScanCallback(new BluetoothService.OnBluetoothScanCallback() {
+        mainService.setOnScanCallback(new BluetoothService.OnBluetoothScanCallback() {
             @Override
             public void onDeviceDiscovered(BluetoothDevice device, int rssi) {
                 if(findDevicesActivityctivity != null) {
@@ -116,7 +122,7 @@ public class BluetoothHandler {
             UIHelper.toast(activity, activity.getString(R.string.no_bluetooth));
             return;
         }
-        service.startScan();
+        mainService.startScan();
     }
 
     private int checkState()
@@ -138,6 +144,14 @@ public class BluetoothHandler {
 
     public void initConnection(BluetoothDevice device)
     {
+        BluetoothServiceExt service = new BluetoothServiceExt(config);
+
+        clientServices.add(service);
+
+        BluetoothWriter writer = new BluetoothWriter(service);
+
+        writers.add(writer);
+
         service.setOnEventCallback(new BluetoothService.OnBluetoothEventCallback() {
             @Override
             public void onDataRead(byte[] buffer, int length) {
@@ -176,6 +190,7 @@ public class BluetoothHandler {
             public void onDataWrite(byte[] buffer) {
             }
         });
+
         service.connect(device);
     }
 
@@ -183,7 +198,10 @@ public class BluetoothHandler {
     {
         final String msg = createMessage("SEARCH",aMsg);
 
-        UIHelper.runOnUiThread(() -> writer.writeln(msg));
+        for( BluetoothWriter w : writers)
+        {
+            w.writeln(msg);
+        }
     }
 
     private FindDevicesActivity verifyFindDevicesActivity(Activity activity)
@@ -203,7 +221,7 @@ public class BluetoothHandler {
 
     public void disconnect()
     {
-        service.disconnect();
+//        service.disconnect();
     }
 
 }
