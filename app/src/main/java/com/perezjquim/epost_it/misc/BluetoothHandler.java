@@ -52,14 +52,11 @@ public class BluetoothHandler
             this.config = new BluetoothConfiguration();
             this.config.bluetoothServiceClass = BluetoothServiceExt.class;
             this.config.context = this.activity.getApplicationContext();
-            this.config.bufferSize = 2048;
+            this.config.bufferSize = 1024;
             this.config.characterDelimiter = '\n';
             this.config.deviceName = "Bluetooth Sample";
             this.config.callListenersInMainThread = true;
-
             this.config.uuid = UUID_DEVICE; // For Classic
-
-
             this.config.uuidService = UUID_SERVICE; // For BLE
             this.config.uuidCharacteristic = UUID_CHARACTERISTIC; // For BLE
             this.config.transport = BluetoothDevice.TRANSPORT_LE; // Only for dual-mode devices
@@ -254,7 +251,7 @@ public class BluetoothHandler
 
     public String createMessage(String action, String msgCode)
     {
-        return "EPOSTIT" + "#" + action + "#" + msgCode;
+        return "#"+"EPOSTIT" + "#" + action + "#" + msgCode;
     }
 
     public void disconnect()
