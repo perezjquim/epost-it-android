@@ -128,7 +128,7 @@ public class FindDevicesActivity extends GenericActivity
                 UIHelper.toast(a, query);
                 adapter.getFilter().filter(query);
                 bluetoothHandler.writeMessage(query);
-                return false;
+                return true;
             }
 
             @Override
@@ -136,7 +136,7 @@ public class FindDevicesActivity extends GenericActivity
             {
                 // filter recycler view when text is changed
                 adapter.getFilter().filter(query);
-                return false;
+                return true;
             }
         });
         return true;
@@ -157,16 +157,5 @@ public class FindDevicesActivity extends GenericActivity
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onBackPressed()
-    {
-        if (!searchView.isIconified())
-        {
-            searchView.setIconified(true);
-            return;
-        }
-        super.onBackPressed();
     }
 }
