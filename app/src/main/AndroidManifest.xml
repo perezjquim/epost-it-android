@@ -19,19 +19,18 @@ android:theme="@style/splash" tools:replace="android:icon,android:label" android
     <meta-data android:name="VERSION" android:value="1" />
     <meta-data android:name="QUERY_LOG" android:value="true" />
     <meta-data android:name="DOMAIN_PACKAGE_NAME" android:value="com.perezjquim.epost_it" />
-<activity
-    android:name=".view.MainActivity"
-    android:configChanges="orientation|screenSize">
-    	    <intent-filter>
-        <action android:name="android.intent.action.MAIN" />
-        <category android:name="android.intent.category.LAUNCHER" />
-    </intent-filter>
+    <activity
+        android:name=".view.MainActivity"
+        android:configChanges="orientation|screenSize" android:launchMode="singleTop">
+                <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
     </activity>
-    <activity android:name=".view.FindDevicesActivity">
+    <activity android:name=".view.FindDevicesActivity" android:launchMode="singleTop">
         <meta-data
             android:name="android.app.searchable"
             android:resource="@xml/searchable" />
-
         <intent-filter>
             <action android:name="android.intent.action.SEARCH" />
         </intent-filter>

@@ -2,7 +2,6 @@ package com.perezjquim.epost_it.data;
 
 import com.orm.query.Condition;
 import com.orm.query.Select;
-import com.perezjquim.epost_it.R;
 import com.perezjquim.epost_it.data.model.Alert;
 import com.perezjquim.epost_it.data.model.Tag;
 import com.perezjquim.epost_it.data.model.ePostIt;
@@ -24,6 +23,7 @@ public abstract class StorageHandler
                 .where(Condition.prop("ISACTIVE").eq("1"))
                 .list();
     }
+
     public static boolean doesPostItExist(String bt_addr)
     {
         return Select
@@ -33,6 +33,7 @@ public abstract class StorageHandler
                 .list()
                 .size() > 0;
     }
+
     public static void insertEPostIt(String bt_addr, String name)
     {
         List<ePostIt> epost_it_list = Select
@@ -43,14 +44,13 @@ public abstract class StorageHandler
 
         ePostIt e;
 
-        if(doesExist)
+        if (doesExist)
         {
             e = epost_it_list.get(0);
             e.setActive(true);
 
             System.out.println("EPOSTIT - INSERT - RE-ENABLE");
-        }
-        else
+        } else
         {
             e = new ePostIt(bt_addr, true, name);
             e.save();
@@ -67,7 +67,7 @@ public abstract class StorageHandler
                 .list();
         boolean doesExist = epost_it_list.size() > 0;
 
-        if(doesExist)
+        if (doesExist)
         {
             ePostIt e = epost_it_list.get(0);
             e.setActive(false);
@@ -87,6 +87,7 @@ public abstract class StorageHandler
     {
         return Tag.listAll(Tag.class);
     }
+
     public static void insertTag(String desc)
     {
         List<Tag> tag_list = Select
@@ -95,14 +96,13 @@ public abstract class StorageHandler
                 .list();
         boolean doesExist = tag_list.size() > 0;
 
-        if(!doesExist)
+        if (!doesExist)
         {
             Tag t = new Tag(desc);
             t.save();
 
             System.out.println("TAG - INSERT - NEW ENTRY");
-        }
-        else
+        } else
         {
             System.out.println("TAG - INSERT - ALREADY EXISTS");
         }
@@ -122,10 +122,12 @@ public abstract class StorageHandler
 
         System.out.println("ALERT - INSERT - NEW ENTRY");
     }
+
     public static void deleteAlert(Alert a)
     {
         // no need
     }
+
     public static List<Alert> getAllAlerts()
     {
         return Alert.listAll(Alert.class);
@@ -151,7 +153,7 @@ public abstract class StorageHandler
                 .list();
         boolean tag_exists = tag_list.size() > 0;
 
-        if(epost_it_exists && tag_exists)
+        if (epost_it_exists && tag_exists)
         {
             ePostIt e = epost_it_list.get(0);
             Tag t = tag_list.get(0);
@@ -162,19 +164,17 @@ public abstract class StorageHandler
                     .list();
             boolean link_exists = link_list.size() > 0;
 
-            if(!link_exists)
+            if (!link_exists)
             {
-                ePostItHasTags link = new ePostItHasTags(e,t);
+                ePostItHasTags link = new ePostItHasTags(e, t);
                 link.save();
 
                 System.out.println("EPOSTIT_HAS_TAGS - INSERT - NEW ENTRY");
-            }
-            else
+            } else
             {
                 System.out.println("EPOSTIT_HAS_TAGS - INSERT - ALREADY EXISTS");
             }
-        }
-        else
+        } else
         {
             System.out.println("EPOSTIT_HAS_TAGS - INVALID EPOSTIT OR TAG");
         }
@@ -194,7 +194,7 @@ public abstract class StorageHandler
                 .list();
         boolean tag_exists = tag_list.size() > 0;
 
-        if(epost_it_exists && tag_exists)
+        if (epost_it_exists && tag_exists)
         {
             ePostIt e = epost_it_list.get(0);
             Tag t = tag_list.get(0);
@@ -205,19 +205,17 @@ public abstract class StorageHandler
                     .list();
             boolean link_exists = link_list.size() > 0;
 
-            if(link_exists)
+            if (link_exists)
             {
                 ePostItHasTags link = link_list.get(0);
                 link.delete();
 
                 System.out.println("EPOSTIT_HAS_TAGS - DELETE - LINK REMOVED");
-            }
-            else
+            } else
             {
                 System.out.println("EPOSTIT_HAS_TAGS - DELETE - ENTRY NOT FOUND");
             }
-        }
-        else
+        } else
         {
             System.out.println("EPOSTIT_HAS_TAGS - INVALID EPOSTIT OR TAG");
         }
@@ -236,7 +234,7 @@ public abstract class StorageHandler
         ePostItHasTags.deleteAll(ePostItHasTags.class);
         Tag.deleteAll(Tag.class);
 
-            System.out.println("-- DB CLEARED --");
+        System.out.println("-- DB CLEARED --");
     }
     // <<< GENERAL
     // <<< GENERAL
@@ -248,11 +246,11 @@ public abstract class StorageHandler
 
         Tag a = new Tag("ola");
         a.save();
-        ePostIt e1  = new ePostIt("TT:TT:TT:TT",true,"Name 1");
+        ePostIt e1 = new ePostIt("TT:TT:TT:TT", true, "Name 1");
         e1.save();
-        ePostIt e2  = new ePostIt("AA:AA:AA:AA",true, "Name 2");
+        ePostIt e2 = new ePostIt("AA:AA:AA:AA", true, "Name 2");
         e2.save();
-        ePostIt e3  = new ePostIt("CC:CC:CC:CC",true, "Name 3");
+        ePostIt e3 = new ePostIt("CC:CC:CC:CC", true, "Name 3");
         e3.save();
 
         List<Tag> c = Select.from(Tag.class).list();

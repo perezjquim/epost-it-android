@@ -13,11 +13,11 @@
         android:layout_gravity="center">
 
         <Button
-            android:id="@+id/b_bluethooth"
+            android:id="@+id/b_bluetooth"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:text="@string/scan_devices"
-            android:onClick="onButhoothHandler"/>
+            android:onClick="onFindDevices"/>
         
     </LinearLayout>
 
