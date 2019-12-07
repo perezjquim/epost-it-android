@@ -50,11 +50,10 @@
       <file leaf-file-name="BluetoothHandler.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/perezjquim/epost_it/misc/BluetoothHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="57" column="57" lean-forward="false" selection-start-line="57" selection-start-column="57" selection-end-line="57" selection-end-column="57" />
+            <state relative-caret-position="157">
+              <caret line="233" column="0" lean-forward="true" selection-start-line="233" selection-start-column="0" selection-end-line="233" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <marker date="1575156653918" expanded="true" signature="7755:7876" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -63,9 +62,11 @@
       <file leaf-file-name="BluetoothService.java" pinned="false" current-in-tab="false">
         <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.douglasjunior.AndroidBluetoothLibrary/BluetoothClassicLibrary/0.3.5/d6e16946bea35c4dae3487501887a02e88e045bc/BluetoothClassicLibrary-0.3.5-sources.jar!/com/github/douglasjunior/bluetoothclassiclibrary/BluetoothService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="121">
+            <state relative-caret-position="969">
               <caret line="80" column="0" lean-forward="false" selection-start-line="80" selection-start-column="0" selection-end-line="80" selection-end-column="0" />
-              <folding />
+              <folding>
+                <element signature="e#2982#2983#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -73,7 +74,7 @@
       <file leaf-file-name="UIHelper.class" pinned="false" current-in-tab="false">
         <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/uihelper--SNAPSHOT.aar/ae1dc3d4bd56b10af39552bb7fcba1a7/jars/classes.jar!/com/perezjquim/UIHelper.class">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="159">
+            <state relative-caret-position="4389">
               <caret line="258" column="27" lean-forward="false" selection-start-line="258" selection-start-column="27" selection-end-line="258" selection-end-column="27" />
               <folding>
                 <marker date="1571177483259" expanded="false" signature="0:104" ph="/.../" />
@@ -134,7 +135,7 @@
       <file leaf-file-name="StorageHandler.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/perezjquim/epost_it/data/StorageHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1729">
+            <state relative-caret-position="4351">
               <caret line="244" column="20" lean-forward="false" selection-start-line="244" selection-start-column="20" selection-end-line="244" selection-end-column="20" />
               <folding />
             </state>
@@ -143,16 +144,16 @@
       </file>
       <file leaf-file-name="AndroidManifest.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-          <provider editor-type-id="android-manifest">
-            <state />
-          </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="224">
+            <state relative-caret-position="608">
               <caret line="32" column="49" lean-forward="false" selection-start-line="32" selection-start-column="49" selection-end-line="32" selection-end-column="49" />
               <folding>
                 <marker date="1575147144948" expanded="true" signature="1513:1528" ph="..." />
               </folding>
             </state>
+          </provider>
+          <provider editor-type-id="android-manifest">
+            <state />
           </provider>
         </entry>
       </file>
@@ -169,7 +170,7 @@
       <file leaf-file-name="GenericActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/perezjquim/epost_it/misc/GenericActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="177">
+            <state relative-caret-position="1064">
               <caret line="64" column="0" lean-forward="false" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
               <folding />
             </state>
@@ -189,7 +190,7 @@
       <file leaf-file-name="FindDevicesAdapter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/perezjquim/epost_it/misc/FindDevicesAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="114">
+            <state relative-caret-position="1178">
               <caret line="79" column="0" lean-forward="false" selection-start-line="79" selection-start-column="0" selection-end-line="120" selection-end-column="5" />
               <folding />
             </state>
@@ -199,7 +200,7 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/perezjquim/epost_it/view/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="11">
+            <state relative-caret-position="1653">
               <caret line="109" column="0" lean-forward="false" selection-start-line="109" selection-start-column="0" selection-end-line="119" selection-end-column="5" />
               <folding />
             </state>
@@ -220,9 +221,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>des</find>
-      <find>S</find>
-      <find>startScan</find>
       <find>createMessage</find>
       <find>disco</find>
       <find>void connect</find>
@@ -250,6 +248,9 @@
       <find>progress</find>
       <find>searchView</find>
       <find>searchview</find>
+      <find>send</find>
+      <find>SEARCH</find>
+      <find>SEARC</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -2386,7 +2387,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="AndroidView">
         <subPane>
@@ -2411,13 +2411,6 @@
               <item name="app" type="feadf853:AndroidModuleNode" />
               <item name="java" type="edd41e36:AndroidSourceTypeNode" />
               <item name="epost_it" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="epost-it-android" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="epost_it" type="cbb59c9e:AndroidPsiDirectoryNode" />
               <item name="misc" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -2429,35 +2422,6 @@
             </path>
             <path>
               <item name="epost-it-android" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
-            </path>
-            <path>
-              <item name="epost-it-android" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
-              <item name="layout" type="ddeffd01:AndroidResFolderTypeNode" />
-            </path>
-            <path>
-              <item name="epost-it-android" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
-              <item name="menu" type="ddeffd01:AndroidResFolderTypeNode" />
-            </path>
-            <path>
-              <item name="epost-it-android" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
-              <item name="values" type="ddeffd01:AndroidResFolderTypeNode" />
-            </path>
-            <path>
-              <item name="epost-it-android" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
-              <item name="xml" type="ddeffd01:AndroidResFolderTypeNode" />
-            </path>
-            <path>
-              <item name="epost-it-android" type="1abcf292:AndroidViewProjectNode" />
               <item name="Gradle Scripts" type="ae0cef3a:AndroidBuildScriptsGroupNode" />
             </path>
           </expand>
@@ -2465,6 +2429,7 @@
         </subPane>
       </pane>
       <pane id="ProjectPane" />
+      <pane id="Scratches" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -2474,7 +2439,7 @@
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="last_opened_file_path" value="$USER_HOME$/CODINGJOKES/android/SimpleBle-master/ExampleApp" />
     <property name="not.eligible.for.single.variant.sync" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1575156658444" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1575761264189" />
     <property name="show.migrate.to.gradle.popup" value="false" />
     <property name="device.picker.selection" value="XEDDU18328012749" />
     <property name="DEBUGGABLE_DEVICE" value="huawei-fig_lx1-XEDDU18328012749" />
@@ -2601,66 +2566,40 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="40" width="1368" height="707" extended-state="6" />
-    <editor active="true" />
+    <frame x="-1" y="40" width="1368" height="731" extended-state="6" />
     <layout>
-      <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Flutter Outline" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32930514" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.328152" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Build" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298791" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39896372" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298791" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Flutter Outline" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3283582" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Build" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3283582" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39896372" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Flutter Inspector" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Flutter Outline" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.328152" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Build" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298791" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39896372" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298791" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Flutter Inspector" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -2690,7 +2629,6 @@
           <caret line="218" column="0" lean-forward="false" selection-start-line="218" selection-start-column="0" selection-end-line="218" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1575156653918" expanded="true" signature="7755:7876" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -2755,7 +2693,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="190">
           <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2778,7 +2715,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="114">
           <caret line="6" column="60" lean-forward="false" selection-start-line="6" selection-start-column="60" selection-end-line="6" selection-end-column="60" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2807,7 +2743,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="115">
           <caret line="29" column="12" lean-forward="false" selection-start-line="29" selection-start-column="12" selection-end-line="29" selection-end-column="12" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2873,7 +2808,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1443">
           <caret line="34" column="11" lean-forward="false" selection-start-line="34" selection-start-column="11" selection-end-line="34" selection-end-column="11" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2916,159 +2850,17 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
           <caret line="224" column="76" lean-forward="false" selection-start-line="224" selection-start-column="76" selection-end-line="224" selection-end-column="76" />
-          <folding>
-            <marker date="1529516863866" expanded="false" signature="0:104" ph="/.../" />
-            <marker date="1529516863866" expanded="false" signature="135:521" ph="..." />
-            <marker date="1529516863866" expanded="false" signature="711:722" ph=" { " />
-            <marker date="1529516863866" expanded="false" signature="758:764" ph=" }" />
-            <marker date="1529516863866" expanded="false" signature="808:819" ph=" { " />
-            <marker date="1529516863866" expanded="false" signature="855:861" ph=" }" />
-            <marker date="1529516863866" expanded="false" signature="886:897" ph=" { " />
-            <marker date="1529516863866" expanded="false" signature="933:939" ph=" }" />
-            <marker date="1529516863866" expanded="false" signature="966:977" ph=" { " />
-            <marker date="1529516863866" expanded="false" signature="1013:1019" ph=" }" />
-            <marker date="1529516863866" expanded="false" signature="1076:1087" ph=" { " />
-            <marker date="1529516863866" expanded="false" signature="1123:1129" ph=" }" />
-            <marker date="1529516863866" expanded="false" signature="1189:1200" ph=" { " />
-            <marker date="1529516863866" expanded="false" signature="1236:1242" ph=" }" />
-            <marker date="1529516863866" expanded="false" signature="1286:1297" ph=" { " />
-            <marker date="1529516863866" expanded="false" signature="1333:1339" ph=" }" />
-            <marker date="1529516863866" expanded="false" signature="1395:1406" ph=" { " />
-            <marker date="1529516863866" expanded="false" signature="1442:1448" ph=" }" />
-            <marker date="1529516863866" expanded="false" signature="1500:1511" ph=" { " />
-            <marker date="1529516863866" expanded="false" signature="1547:1553" ph=" }" />
-            <marker date="1529516863866" expanded="false" signature="1597:1608" ph=" { " />
-            <marker date="1529516863866" expanded="false" signature="1644:1650" ph=" }" />
-            <marker date="1529516863866" expanded="false" signature="1692:1703" ph=" { " />
-            <marker date="1529516863866" expanded="false" signature="1739:1745" ph=" }" />
-            <marker date="1529516863866" expanded="false" signature="1774:1785" ph=" { " />
-            <marker date="1529516863866" expanded="false" signature="1821:1827" ph=" }" />
-            <marker date="1529516863866" expanded="false" signature="1860:1871" ph=" { " />
-            <marker date="1529516863866" expanded="false" signature="1907:1913" ph=" }" />
-            <marker date="1529516863866" expanded="false" signature="1958:1969" ph=" { " />
-            <marker date="1529516863866" expanded="false" signature="2005:2011" ph=" }" />
-            <marker date="1529516863866" expanded="false" signature="2050:2061" ph=" { " />
-            <marker date="1529516863866" expanded="false" signature="2097:2103" ph=" }" />
-            <marker date="1529516863866" expanded="false" signature="2139:2150" ph=" { " />
-            <marker date="1529516863866" expanded="false" signature="2186:2192" ph=" }" />
-            <marker date="1529516863866" expanded="false" signature="2226:2237" ph=" { " />
-            <marker date="1529516863866" expanded="false" signature="2273:2279" ph=" }" />
-            <marker date="1529516863866" expanded="false" signature="2313:2324" ph=" { " />
-            <marker date="1529516863866" expanded="false" signature="2360:2366" ph=" }" />
-            <marker date="1529516863866" expanded="false" signature="2399:2410" ph=" { " />
-            <marker date="1529516863866" expanded="false" signature="2446:2452" ph=" }" />
-            <marker date="1529516863866" expanded="false" signature="2501:2512" ph=" { " />
-            <marker date="1529516863866" expanded="false" signature="2548:2554" ph=" }" />
-            <marker date="1529516863866" expanded="false" signature="2603:2614" ph=" { " />
-            <marker date="1529516863866" expanded="false" signature="2650:2656" ph=" }" />
-            <marker date="1529516863866" expanded="false" signature="2691:2702" ph=" { " />
-            <marker date="1529516863866" expanded="false" signature="2738:2744" ph=" }" />
-            <marker date="1529516863866" expanded="false" signature="2792:2803" ph=" { " />
-            <marker date="1529516863866" expanded="false" signature="2839:2845" ph=" }" />
-            <marker date="1529516863866" expanded="false" signature="2899:2910" ph=" { " />
-            <marker date="1529516863866" expanded="false" signature="2946:2952" ph=" }" />
-            <marker date="1529516863866" expanded="true" signature="3023:3075" ph="{...}" />
-            <marker date="1529516863866" expanded="true" signature="3145:3197" ph="{...}" />
-            <marker date="1529516863866" expanded="true" signature="3328:3380" ph="{...}" />
-            <marker date="1529516863866" expanded="true" signature="3502:3554" ph="{...}" />
-            <marker date="1529516863866" expanded="true" signature="3645:3697" ph="{...}" />
-            <marker date="1529516863866" expanded="true" signature="3775:3827" ph="{...}" />
-            <marker date="1529516863866" expanded="true" signature="3930:3982" ph="{...}" />
-            <marker date="1529516863866" expanded="true" signature="4055:4107" ph="{...}" />
-            <marker date="1529516863866" expanded="true" signature="4192:4244" ph="{...}" />
-            <marker date="1529516863866" expanded="true" signature="4332:4384" ph="{...}" />
-            <marker date="1529516863866" expanded="false" signature="4429:4440" ph=" { " />
-            <marker date="1529516863866" expanded="false" signature="4476:4482" ph=" }" />
-            <marker date="1529516863866" expanded="false" signature="4527:4538" ph=" { " />
-            <marker date="1529516863866" expanded="false" signature="4574:4580" ph=" }" />
-            <marker date="1529516863866" expanded="false" signature="4624:4635" ph=" { " />
-            <marker date="1529516863866" expanded="false" signature="4671:4677" ph=" }" />
-            <marker date="1529516863866" expanded="false" signature="4725:4736" ph=" { " />
-            <marker date="1529516863866" expanded="false" signature="4772:4778" ph=" }" />
-            <marker date="1529516863866" expanded="false" signature="4830:4841" ph=" { " />
-            <marker date="1529516863866" expanded="false" signature="4877:4883" ph=" }" />
-            <marker date="1529516863866" expanded="false" signature="4942:4953" ph=" { " />
-            <marker date="1529516863866" expanded="false" signature="4989:4995" ph=" }" />
-            <marker date="1529516863866" expanded="true" signature="5164:5216" ph="{...}" />
-            <marker date="1529516863866" expanded="true" signature="5374:5426" ph="{...}" />
-            <marker date="1529516863866" expanded="false" signature="5484:5495" ph=" { " />
-            <marker date="1529516863866" expanded="false" signature="5531:5537" ph=" }" />
-            <marker date="1529516863866" expanded="true" signature="5817:5869" ph="{...}" />
-            <marker date="1529516863866" expanded="true" signature="6030:6082" ph="{...}" />
-            <marker date="1529516863866" expanded="true" signature="6155:6207" ph="{...}" />
-            <marker date="1529516863866" expanded="true" signature="6315:6367" ph="{...}" />
-            <marker date="1529516863866" expanded="false" signature="6425:6436" ph=" { " />
-            <marker date="1529516863866" expanded="false" signature="6472:6478" ph=" }" />
-            <marker date="1529516863866" expanded="true" signature="6577:6629" ph="{...}" />
-            <marker date="1529516863866" expanded="true" signature="6763:6815" ph="{...}" />
-            <marker date="1529516863866" expanded="true" signature="6892:6944" ph="{...}" />
-            <marker date="1529516863866" expanded="true" signature="7056:7108" ph="{...}" />
-            <marker date="1529516863866" expanded="true" signature="7184:7236" ph="{...}" />
-            <marker date="1529516863866" expanded="false" signature="7292:7303" ph=" { " />
-            <marker date="1529516863866" expanded="false" signature="7339:7345" ph=" }" />
-            <marker date="1529516863866" expanded="false" signature="7403:7414" ph=" { " />
-            <marker date="1529516863866" expanded="false" signature="7450:7456" ph=" }" />
-            <marker date="1529516863866" expanded="false" signature="7513:7524" ph=" { " />
-            <marker date="1529516863866" expanded="false" signature="7560:7566" ph=" }" />
-            <marker date="1529516863866" expanded="false" signature="7621:7632" ph=" { " />
-            <marker date="1529516863866" expanded="false" signature="7668:7674" ph=" }" />
-            <marker date="1529516863866" expanded="true" signature="7760:7812" ph="{...}" />
-            <marker date="1529516863866" expanded="true" signature="7936:7988" ph="{...}" />
-            <marker date="1529516863866" expanded="false" signature="8044:8055" ph=" { " />
-            <marker date="1529516863866" expanded="false" signature="8091:8097" ph=" }" />
-            <marker date="1529516863866" expanded="true" signature="8160:8212" ph="{...}" />
-            <marker date="1529516863866" expanded="true" signature="8218:8236" ph="/**...*/" />
-            <marker date="1529516863866" expanded="false" signature="8289:8300" ph=" { " />
-            <marker date="1529516863866" expanded="false" signature="8336:8342" ph=" }" />
-            <marker date="1529516863866" expanded="true" signature="8348:8366" ph="/**...*/" />
-            <marker date="1529516863866" expanded="false" signature="8418:8429" ph=" { " />
-            <marker date="1529516863866" expanded="false" signature="8465:8471" ph=" }" />
-            <marker date="1529516863866" expanded="false" signature="8507:8518" ph=" { " />
-            <marker date="1529516863866" expanded="false" signature="8554:8560" ph=" }" />
-            <marker date="1529516863866" expanded="false" signature="8597:8608" ph=" { " />
-            <marker date="1529516863866" expanded="false" signature="8644:8650" ph=" }" />
-            <marker date="1529516863866" expanded="false" signature="8693:8704" ph=" { " />
-            <marker date="1529516863866" expanded="false" signature="8740:8746" ph=" }" />
-            <marker date="1529516863866" expanded="false" signature="8798:8809" ph=" { " />
-            <marker date="1529516863866" expanded="false" signature="8845:8851" ph=" }" />
-            <marker date="1529516863866" expanded="true" signature="8918:8970" ph="{...}" />
-            <marker date="1529516863866" expanded="true" signature="9017:9347" ph="{...}" />
-            <marker date="1529516863866" expanded="true" signature="9084:9144" ph="{...}" />
-            <marker date="1529516863866" expanded="false" signature="9180:9195" ph=" { " />
-            <marker date="1529516863866" expanded="false" signature="9231:9241" ph=" }" />
-            <marker date="1529516863866" expanded="false" signature="9280:9295" ph=" { " />
-            <marker date="1529516863866" expanded="false" signature="9331:9341" ph=" }" />
-            <marker date="1529516863866" expanded="true" signature="9389:10743" ph="{...}" />
-            <marker date="1529516863866" expanded="true" signature="9496:9556" ph="{...}" />
-            <marker date="1529516863866" expanded="true" signature="9655:9715" ph="{...}" />
-            <marker date="1529516863866" expanded="false" signature="9749:9764" ph=" { " />
-            <marker date="1529516863866" expanded="false" signature="9800:9810" ph=" }" />
-            <marker date="1529516863866" expanded="false" signature="9857:9872" ph=" { " />
-            <marker date="1529516863866" expanded="false" signature="9908:9918" ph=" }" />
-            <marker date="1529516863866" expanded="true" signature="9984:10044" ph="{...}" />
-            <marker date="1529516863866" expanded="false" signature="10087:10102" ph=" { " />
-            <marker date="1529516863866" expanded="false" signature="10138:10148" ph=" }" />
-            <marker date="1529516863866" expanded="false" signature="10184:10199" ph=" { " />
-            <marker date="1529516863866" expanded="false" signature="10235:10245" ph=" }" />
-            <marker date="1529516863866" expanded="false" signature="10294:10309" ph=" { " />
-            <marker date="1529516863866" expanded="false" signature="10345:10355" ph=" }" />
-            <marker date="1529516863866" expanded="false" signature="10404:10419" ph=" { " />
-            <marker date="1529516863866" expanded="false" signature="10455:10465" ph=" }" />
-            <marker date="1529516863866" expanded="true" signature="10538:10598" ph="{...}" />
-            <marker date="1529516863866" expanded="true" signature="10677:10737" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="277">
           <caret line="19" column="42" lean-forward="false" selection-start-line="19" selection-start-column="42" selection-end-line="19" selection-end-column="42" />
-          <folding />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/perezjquim/epost_it/misc/BluetoothServiceExt.java">
@@ -3083,7 +2875,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3091,26 +2882,25 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider editor-type-id="android-manifest">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
+        <state relative-caret-position="608">
           <caret line="32" column="49" lean-forward="false" selection-start-line="32" selection-start-column="49" selection-end-line="32" selection-end-column="49" />
           <folding>
             <marker date="1575147144948" expanded="true" signature="1513:1528" ph="..." />
           </folding>
         </state>
       </provider>
+      <provider editor-type-id="android-manifest">
+        <state />
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/perezjquim/epost_it/data/StorageHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1729">
+        <state relative-caret-position="4351">
           <caret line="244" column="20" lean-forward="false" selection-start-line="244" selection-start-column="20" selection-end-line="244" selection-end-column="20" />
           <folding />
         </state>
@@ -3118,7 +2908,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/perezjquim/epost_it/misc/FindDevicesAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
+        <state relative-caret-position="1178">
           <caret line="79" column="0" lean-forward="false" selection-start-line="79" selection-start-column="0" selection-end-line="120" selection-end-column="5" />
           <folding />
         </state>
@@ -3126,7 +2916,7 @@
     </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/uihelper--SNAPSHOT.aar/ae1dc3d4bd56b10af39552bb7fcba1a7/jars/classes.jar!/com/perezjquim/UIHelper.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="159">
+        <state relative-caret-position="4389">
           <caret line="258" column="27" lean-forward="false" selection-start-line="258" selection-start-column="27" selection-end-line="258" selection-end-column="27" />
           <folding>
             <marker date="1571177483259" expanded="false" signature="0:104" ph="/.../" />
@@ -3185,15 +2975,17 @@
     </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.douglasjunior.AndroidBluetoothLibrary/BluetoothClassicLibrary/0.3.5/d6e16946bea35c4dae3487501887a02e88e045bc/BluetoothClassicLibrary-0.3.5-sources.jar!/com/github/douglasjunior/bluetoothclassiclibrary/BluetoothService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="121">
+        <state relative-caret-position="969">
           <caret line="80" column="0" lean-forward="false" selection-start-line="80" selection-start-column="0" selection-end-line="80" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#2982#2983#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/perezjquim/epost_it/misc/GenericActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
+        <state relative-caret-position="1064">
           <caret line="64" column="0" lean-forward="false" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
           <folding />
         </state>
@@ -3201,16 +2993,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/perezjquim/epost_it/view/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="11">
+        <state relative-caret-position="1653">
           <caret line="109" column="0" lean-forward="false" selection-start-line="109" selection-start-column="0" selection-end-line="119" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/perezjquim/epost_it/view/FindDevicesActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="277">
-          <caret line="153" column="5" lean-forward="false" selection-start-line="153" selection-start-column="5" selection-end-line="153" selection-end-column="5" />
           <folding />
         </state>
       </provider>
@@ -3223,13 +3007,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/perezjquim/epost_it/view/FindDevicesActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="277">
+          <caret line="153" column="5" lean-forward="false" selection-start-line="153" selection-start-column="5" selection-end-line="153" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/perezjquim/epost_it/misc/BluetoothHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="57" column="57" lean-forward="false" selection-start-line="57" selection-start-column="57" selection-end-line="57" selection-end-column="57" />
+        <state relative-caret-position="157">
+          <caret line="233" column="0" lean-forward="true" selection-start-line="233" selection-start-column="0" selection-end-line="233" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1575156653918" expanded="true" signature="7755:7876" ph="{...}" />
           </folding>
         </state>
       </provider>

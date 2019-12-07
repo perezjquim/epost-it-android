@@ -230,7 +230,7 @@ public class BluetoothHandler
 
     public void writeMessage(String aMsg)
     {
-        String msg = createMessage("SEARCH", aMsg);
+        String msg = createMessage("SEARCH", aMsg.replace(" ",","));
 
         for (Map.Entry<BluetoothService, BluetoothWriter> entry : writers.entrySet())
         {
