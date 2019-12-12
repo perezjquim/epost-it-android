@@ -228,14 +228,31 @@ public class BluetoothHandler
         service.connect(device);
     }
 
-    public void writeMessage(String aMsg)
+    public void writeMessage(String aAction, String aMsg)
     {
-        String msg = createMessage("SEARCH", aMsg.replace(" ",","));
+        String msg = createMessage(aAction, aMsg.replace(" ",","));
 
         for (Map.Entry<BluetoothService, BluetoothWriter> entry : writers.entrySet())
         {
             BluetoothWriter w = entry.getValue();
             w.writeln(msg);
+        }
+    }
+
+    public void writeMessage(String aAction, String aMsg, BluetoothDevice device)
+    {
+        String msg = createMessage(aAction, aMsg.replace(" ",","));
+
+        int index = devicesPaired.indexOf(device);
+        if(index > -1)
+        {
+            BluetoothService s = clientServices.get(index);
+            BluetoothWriter w = writers.get(s);
+            w.writeln(msg);
+        }
+        else
+        {
+            // erro
         }
     }
 

@@ -1,6 +1,10 @@
 package com.perezjquim.epost_it.view;
 
 import android.app.SearchManager;
+import android.bluetooth.BluetoothDevice;
+import com.github.florent37.singledateandtimepicker.dialog.*;
+import com.github.florent37.singledateandtimepicker.*;
+import java.util.Date;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -94,7 +98,7 @@ public class MainActivity extends GenericActivity
             public boolean onQueryTextSubmit(String query)
             {
                 UIHelper.toast(c, query);
-                _btHandler.writeMessage(query);
+                _btHandler.writeMessage("SEARCH",query);
                 return true;
             }
 
@@ -117,5 +121,31 @@ public class MainActivity extends GenericActivity
             return;
         }
         super.onBackPressed();
+    }
+
+    private void onTagsPrompt(BluetoothDevice aDevice)
+    {
+        UIHelper.askString(this,"Tags", "Set-up", (input) ->
+        {
+            _btHandler.writeMessage("TAGS", input.toString(), aDevice);
+        });
+    }
+
+    private void onSchedulePrompt(BluetoothDevice aDevice)
+    {
+        new SingleDateAndTimePickerDialog.Builder(this)
+                .displayListener(new SingleDateAndTimePickerDialog.DisplayListener() {
+                    @Override
+                    public void onDisplayed(SingleDateAndTimePicker picker) {
+                        //retrieve the SingleDateAndTimePicker
+                    }
+                })
+                .title("Simple")
+                .listener(new SingleDateAndTimePickerDialog.Listener() {
+                    @Override
+                    public void onDateSelected(Date date) {
+
+                    }
+                }).display();
     }
 }
