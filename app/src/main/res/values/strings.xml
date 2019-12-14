@@ -5,4 +5,7 @@
     <string name="no_bluetooth">Este dispositivo não tem bluetooth.</string>
     <string name="no_device_name">Desconhecido</string>
     <string name="action_search">Pesquisar</string>
+    <string name="tags_title">Tags</string>
+    <string name="tags_subtitle">Set-up</string>
+    <string name="schedule_title">Define schedule</string>
 </resources>

@@ -14,6 +14,7 @@ import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+ import android.content.res.*;
 
 import com.perezjquim.UIHelper;
 import com.perezjquim.epost_it.R;
@@ -22,6 +23,7 @@ import com.perezjquim.epost_it.data.model.ePostIt;
 import com.perezjquim.epost_it.misc.BluetoothHandler;
 import com.perezjquim.epost_it.misc.GenericActivity;
 import com.perezjquim.epost_it.misc.MyEPostItsAdapter;
+import com.perezjquim.epost_it.misc.MyEPostItsAdapter.ViewHolder;
 
 import java.util.ArrayList;
 
@@ -38,12 +40,14 @@ public class MainActivity extends GenericActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         BluetoothHandler.test();
         StorageHandler.test();
-        epostit_list = new ArrayList<>(StorageHandler.getAllEPostIts());
-        this.initializeRecycleView();
 
+        epostit_list = new ArrayList<>(StorageHandler.getAllEPostIts());
         _btHandler = new BluetoothHandler(this);
+
+        this.initializeRecycleView();
     }
 
     @Override
@@ -66,8 +70,20 @@ public class MainActivity extends GenericActivity
         this.recyclerView = findViewById(R.id.rvMyEPostIts);
         this.adapter = new MyEPostItsAdapter(this, this.epostit_list, (selection) ->
         {
-            ViewGroup parent = (ViewGroup) selection.getParent();
-            int position = parent.indexOfChild(selection);
+            String bt_addr = _getSelectedAddress(selection);
+            if(bt_addr != null)
+            {
+                onTagsPrompt(bt_addr);
+            }
+        },
+        (selection) ->
+        {
+            String bt_addr = _getSelectedAddress(selection);
+            if(bt_addr != null)
+            {
+                onSchedulePrompt(bt_addr);
+            }
+            return true;
         });
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -123,29 +139,47 @@ public class MainActivity extends GenericActivity
         super.onBackPressed();
     }
 
-    private void onTagsPrompt(BluetoothDevice aDevice)
+    private void onTagsPrompt(String bt_addr)
     {
-        UIHelper.askString(this,"Tags", "Set-up", (input) ->
+        Resources r = getResources();
+        String title = r.getString(R.string.tags_title);
+        String subtitle = r.getString(R.string.tags_subtitle);
+
+        UIHelper.askString(this,title, subtitle, (input) ->
         {
-            _btHandler.writeMessage("TAGS", input.toString(), aDevice);
+            _btHandler.writeMessage("TAGS", input.toString(), bt_addr);
         });
     }
 
-    private void onSchedulePrompt(BluetoothDevice aDevice)
+    private void onSchedulePrompt(String bt_addr)
     {
-        new SingleDateAndTimePickerDialog.Builder(this)
-                .displayListener(new SingleDateAndTimePickerDialog.DisplayListener() {
-                    @Override
-                    public void onDisplayed(SingleDateAndTimePicker picker) {
-                        //retrieve the SingleDateAndTimePicker
-                    }
-                })
-                .title("Simple")
-                .listener(new SingleDateAndTimePickerDialog.Listener() {
-                    @Override
-                    public void onDateSelected(Date date) {
+        Resources r = getResources();
+        int c = r.getColor(R.color.colorPrimary);
+        String title = r.getString(R.string.schedule_title);
 
-                    }
+        new SingleDateAndTimePickerDialog.Builder(this)
+                .mustBeOnFuture()
+                .mainColor(c)
+                .title(title)
+                .listener((date) ->
+                {
+                        long time_left = date.getTime() - System.currentTimeMillis();
+                        _btHandler.writeMessage("SCHEDULE",""+time_left, bt_addr);
                 }).display();
+    }
+
+    private String _getSelectedAddress(View selection)
+    {
+        ViewGroup parent = (ViewGroup) selection.getParent();
+        int position = parent.indexOfChild(selection);
+        ViewHolder h = (MyEPostItsAdapter.ViewHolder)  recyclerView.findViewHolderForAdapterPosition(position);
+        if(h != null)
+        {
+            return h.getAddress();
+        }
+        else
+        {
+            return null;
+        }
     }
 }
