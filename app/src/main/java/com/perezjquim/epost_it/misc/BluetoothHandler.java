@@ -244,17 +244,23 @@ public class BluetoothHandler
     public void writeMessage(String aAction, String aMsg, String bt_addr)
     {
         String msg = createMessage(aAction, _parseTokenString(aMsg));
-        BluetoothWriter w = writers.get(bt_addr);
-        if(w != null)
+        BluetoothDevice d = devicesPaired.get(bt_addr);
+        if(d != null)
         {
-            w.writeln(msg);
+            BluetoothWriter w = writers.get(d);
+            if (w != null)
+            {
+                w.writeln(msg);
+            }
+            else
+            {
+                System.out.println("-- WRITER NOT FOUND --");
+            }
         }
         else
         {
-            System.out.println("-- WRITER NOT FOUND --");
+            System.out.println("-- DEVICE NOT FOUND --");
         }
-
-        System.out.println(msg);
     }
 
     private FindDevicesActivity verifyFindDevicesActivity(Activity activity)
@@ -299,8 +305,7 @@ public class BluetoothHandler
     {
         return s
                     .trim()
-                    .replaceAll(" +", " ")
-                    .replaceAll(",+",",")
-                    .replace(" ", ",");
+                    .replace(" ", ",")
+                    .replaceAll(",+",",");
     }
 }

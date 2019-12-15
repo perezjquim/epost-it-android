@@ -113,7 +113,7 @@ public class MainActivity extends GenericActivity
             @Override
             public boolean onQueryTextSubmit(String query)
             {
-                UIHelper.toast(c, query);
+//                UIHelper.toast(c, query);
                 _btHandler.writeMessage("SEARCH",query);
                 return true;
             }
