@@ -25,15 +25,14 @@ import java.util.UUID;
 
 public class BluetoothHandler
 {
-
     private FindDevicesActivity findDevicesActivity;
     private Activity activity;
     public final static int REQUEST_ENABLE_BT = 1;
-    private static ArrayList<BluetoothDevice> devicesPaired = new ArrayList<BluetoothDevice>();
+    private static HashMap<String,BluetoothDevice> devicesPaired = new HashMap<>();
     private static BluetoothConfiguration config;
     private static BluetoothService mainService;
-    private static ArrayList<BluetoothService> clientServices;
-    private static HashMap<BluetoothService, BluetoothWriter> writers;
+    private static HashMap<BluetoothDevice,BluetoothService> clientServices;
+    private static HashMap<BluetoothDevice, BluetoothWriter> writers;
     private static final UUID UUID_DEVICE = UUID.fromString("00001101-0000-1000-8000-00805f9b34fb");
     private static final UUID UUID_SERVICE = UUID.fromString("e7810a71-73ae-499d-8c15-faa9aef0c3f2");
     private static final UUID UUID_CHARACTERISTIC = UUID.fromString("bef8d6c9-9c21-4c9e-b632-bd58c1009f9f");
@@ -67,7 +66,7 @@ public class BluetoothHandler
         if (mainService == null) mainService = BluetoothService.getDefaultInstance();
 
 //        service = new BluetoothServiceExt(config);
-        if (clientServices == null) clientServices = new ArrayList<>();
+        if (clientServices == null) clientServices = new HashMap<>();
         if (writers == null) writers = new HashMap<>();
 
 //        this.writer = new BluetoothWriter(service);
@@ -150,13 +149,14 @@ public class BluetoothHandler
 
     public void initConnection(BluetoothDevice device)
     {
-        BluetoothServiceExt service = new BluetoothServiceExt(config);
+        final String bt_addr = device.getAddress();
+        final String name = device.getName();
 
-        clientServices.add(service);
+        BluetoothServiceExt service = new BluetoothServiceExt(config);
+        clientServices.put(device, service);
 
         BluetoothWriter writer = new BluetoothWriter(service);
-
-        writers.put(service, writer);
+        writers.put(device, writer);
 
         service.setOnEventCallback(new BluetoothService.OnBluetoothEventCallback()
         {
@@ -174,18 +174,20 @@ public class BluetoothHandler
             {
                 if (status == BluetoothStatus.CONNECTED)
                 {
-                    String name = device.getName();
-                    if (name == null || name.equals(""))
+                    String actualName = name;
+                    if (actualName == null || actualName.equals(""))
                     {
-                        name = activity.getResources().getString(R.string.no_device_name);
+                        actualName = activity.getResources().getString(R.string.no_device_name);
                     }
-                    StorageHandler.insertEPostIt(device.getAddress(), name);
+                    StorageHandler.insertEPostIt(bt_addr, actualName);
+
                     //remover o device da lista de devices
                     if (findDevicesActivity != null)
                     {
                         findDevicesActivity.removeDevice(device);
                     }
-                    devicesPaired.add(device);
+
+                    devicesPaired.put(bt_addr,device);
 
 //                    UIHelper.closeProgressDialog(activity);
                     UIHelper.toast(activity, "Paired");
@@ -193,9 +195,9 @@ public class BluetoothHandler
 
                 } else if (status == BluetoothStatus.NONE)
                 {
-                    devicesPaired.remove(device);
-                    clientServices.remove(service);
-                    writers.remove(service);
+                    devicesPaired.remove(bt_addr);
+                    clientServices.remove(device);
+                    writers.remove(device);
 
 //                    UIHelper.closeProgressDialog(activity);
                     UIHelper.toast(activity, "Unpaired");
@@ -228,14 +230,36 @@ public class BluetoothHandler
         service.connect(device);
     }
 
-    public void writeMessage(String aMsg)
+    public void writeMessage(String aAction, String aMsg)
     {
-        String msg = createMessage("SEARCH", aMsg);
+        String msg = createMessage(aAction, _parseTokenString(aMsg));
 
-        for (Map.Entry<BluetoothService, BluetoothWriter> entry : writers.entrySet())
+        for (Map.Entry<BluetoothDevice, BluetoothWriter> entry : writers.entrySet())
         {
             BluetoothWriter w = entry.getValue();
             w.writeln(msg);
+        }
+    }
+
+    public void writeMessage(String aAction, String aMsg, String bt_addr)
+    {
+        String msg = createMessage(aAction, _parseTokenString(aMsg));
+        BluetoothDevice d = devicesPaired.get(bt_addr);
+        if(d != null)
+        {
+            BluetoothWriter w = writers.get(d);
+            if (w != null)
+            {
+                w.writeln(msg);
+            }
+            else
+            {
+                System.out.println("-- WRITER NOT FOUND --");
+            }
+        }
+        else
+        {
+            System.out.println("-- DEVICE NOT FOUND --");
         }
     }
 
@@ -277,4 +301,11 @@ public class BluetoothHandler
         }
     }
 
+    private String _parseTokenString(String s)
+    {
+        return s
+                    .trim()
+                    .replace(" ", ",")
+                    .replaceAll(",+",",");
+    }
 }

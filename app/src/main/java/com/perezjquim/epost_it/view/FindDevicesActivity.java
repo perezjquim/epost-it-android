@@ -124,7 +124,7 @@ public class FindDevicesActivity extends GenericActivity
             @Override
             public boolean onQueryTextSubmit(String query)
             {
-                UIHelper.toast(c, query);
+//                UIHelper.toast(c, query);
                 adapter.getFilter().filter(query);
 //                bluetoothHandler.writeMessage(query);
                 return true;
